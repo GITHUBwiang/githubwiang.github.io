@@ -103,4 +103,7 @@ theme: fluid
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: 'git'
+  repo: https://github.com/xianglin2020/xianglin2020.github.io
+  branch: gh-page
+  token: 5119dc9593b9a8e5e9385d1c7d2950e1f08fd27d
