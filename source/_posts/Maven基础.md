@@ -244,11 +244,11 @@ Maven 项目的核心是`pom.xml`,`POM(Project Object Model)`项目对象模型�
    </project>
    ```
 
-   	* 第一行指定了 XML 文件的版本和编码方式
-   	* `project`元素是`pom.xml`的根元素
-   	* `modelVersion`指定了当前 POM 模型的版本
-   	* `groupId`、`artifactId`、`version`这三个元素定义一个项目的基本坐标。`groupId`定义项目属于哪个组，这个组一般与项目所在的公司和组织相关；`artifactId`定义当前Maven 项目在组中的唯一 ID；`version`指定当前项目的版本。
-   	* `name`元素声明一个对于友好的项目名称
+* 第一行指定了 XML 文件的版本和编码方式
+* `project`元素是`pom.xml`的根元素
+* `modelVersion`指定了当前 POM 模型的版本
+* `groupId`、`artifactId`、`version`这三个元素定义一个项目的基本坐标。`groupId`定义项目属于哪个组，这个组一般与项目所在的公司和组织相关；`artifactId`定义当前Maven 项目在组中的唯一 ID；`version`指定当前项目的版本。
+* `name`元素声明一个友好的项目名称
 
 3. 编写主代码
 
@@ -424,4 +424,74 @@ Maven 项目的核心是`pom.xml`,`POM(Project Object Model)`项目对象模型�
    mvn archetype:generate
    ```
 
-   
+
+
+
+## 坐标和依赖
+
+### Maven 坐标
+
+Maven 坐标为各种构件引入了秩序，任何一个构件都必须明确定义自己的坐标，而一组 Maven 坐标是通过一些元素定义的，它们是：`groupId`、`artifactId`、`version`、`packaging`、`classifier`。
+
+```xml
+<groupId>org.sonatype.nexus</groupId>
+<artifactId>nexus-indexer</artifactId>
+<version>2.0.0</version>
+<packaging>jar</packaging>
+```
+
+* `groupId`：定义当前项目的实际项目。由于Maven中模块的概念，一个项目往往会被划分为很多模块。
+* `artifactId`：定义实际项目中的一个Maven模块，推荐做法是使用实际项目的名称作为artifactId的前缀。
+* `version`：定义Maven项目当前所处的版本。
+* `package`：定义Maven项目的打包方式，打包方式会影响到构建的生命周期。当不定义packaging时，Maven会使用默认值`jar`。
+* `classifier`：用来帮助定义构建输出的一些辅助构建。
+
+### 依赖的配置
+
+一个依赖声明可以包含如下一些元素
+
+```xml
+<dependency>
+    <groupId></groupId>
+    <artifactId></artifactId>
+    <version></version>
+    <type></type>
+    <scope></scope>
+    <optional></optional>
+    <exclusions>
+      <exclusion>
+      </exclusion>
+    </exclusions>
+</dependency>
+```
+
+* `type`：依赖的类型，对应于项目坐标定义中的`packaging`。大部分情况下，该元素不必声明，默认值为`jar`。
+* `scope`：依赖的范围。
+* `option`：标记依赖是否可选。
+* `exclusions`：用来排除传递性依赖。
+
+### 依赖范围
+
+依赖范围就是用来控制依赖与三种 `classpath`（编译 classpath、测试 classpath、运行 classpa）的关系，Maven 中有以下几种依赖范围：
+
+* `compile`：编译依赖范围，默认值。使用此依赖范围的 Maven 依赖，对于编译、测试、运行三种 classpath 都有效。
+
+* `test`：测试依赖范围，只对测试 classpath 有效，在编译主代码和运行项目时将无法使用此类依赖，典型的例子就是 JUnit。
+
+* `provided`：已提供依赖范围。使用此依赖范围的 Maven 依赖，对于编译和测试 classpath 有效，但在运行时无效。典型的例子就是`servlet-api`，编译和测试时需要此依赖，在运行项目时，容器已提供，就不想要重复地引入。
+
+* `runtime`：运行时依赖范围。使用此依赖范围的 Maven 依赖，对于测试和运行 classpath 有效，但在编译主代码时无效。典型的例子是 JDBC 驱动实现，项目主代码编译时只需要 JDK 提供的 JDBC 接口，只有在执行时测试或运行项目时才需要具体的 JDBC 驱动。
+
+* `system`：系统依赖范围。和`provided`依赖范围一致。使用 system 范围的依赖必须通过 systemPath 元素显示地指定依赖文件的路径。systemPath 可以引用环境变量。
+
+  ```xml
+  <dependency>
+      <groupId>javax.sql</groupId>
+      <artifactId>jdbc-stdext</artifactId>
+      <version>2.0</version>
+      <scope>system</scope>
+      <systemPath>${java.home}/lib/rt.jar</systemPath>
+  </dependency>
+  ```
+
+* `import`：导入依赖范围。该依赖范围不会对三种 classpath 产生实际的影响。
