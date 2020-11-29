@@ -412,7 +412,7 @@ SQL 语句中会使用`IN`关键字，例如`id in (1, 2, 3)`，可以使用`${i
 
 ### 一级缓存
 
-MyBatis 的一级缓存存在于 `SqlSession` 的生命周期中，在同一个` SqlSession` 中查询时，MyBatis 会把执行的方法和参数通过算法生成缓存的键值，将键值和查询结果存入一个 `Map` 对象中。如果同一个 `SqlSession` 中执行的方法和参数完全一致，那么通过算法会生成相同的键值，当 `Map` 缓存对象中已经存在该键值时，则会返回缓存中的对象。因为任何的 `INSERT`、 `UPDATE`、`DELETE` 操作都会清空一级缓存。也可以在`select`标签中添加`flushCache="true"`元素，让 MyBatis 在查询数据前清空当前的一级缓存。
+MyBatis 的一级缓存存在于 `SqlSession` 的生命周期中，在同一个` SqlSession` 中查询时，MyBatis 会把执行的方法和参数通过算法生成缓存的键值，将键值和查询结果存入一个 `Map` 对象中。如果同一个 `SqlSession` 中执行的方法和参数完全一致，那么通过算法会生成相同的键值，当 `Map` 缓存对象中已经存在该键值时，则会返回缓存中的对象。任何的 `INSERT`、 `UPDATE`、`DELETE` 操作都会清空一级缓存。也可以在`select`标签中添加`flushCache="true"`元素，让 MyBatis 在查询数据前清空当前的一级缓存。
 
 
 * 一级缓存实现
@@ -529,7 +529,7 @@ MyBatis 的二级缓存和命名空间绑定的，即二级缓存需要配置在
 
   ```xml
   <cache
-         eviation="FIFO"
+         eviction="FIFO"
          flushInterval="60000"
          size="512"
          readOnly="true"/>
@@ -631,5 +631,91 @@ DEBUG [main] - Cache Hit Ratio [person.xianglin.simple.mapper.RoleMapper]: 0.333
 DEBUG [main] - Cache Hit Ratio [person.xianglin.simple.mapper.RoleMapper]: 0.5
 ```
 
+### 集成`EhCache`缓存
 
+MyBatis 项目开发者最早提供了 `EhCache` 的 MyBatis 二级缓存实现， 该项目名为 `ehcache-cache`，地址是 https//github.com/mybatis/ehcache-cache。
+
+1. 添加项目依赖
+
+   在`pom.xml`文件中加入如下依赖
+
+   ```xml
+   <dependency>
+       <groupId>org.mybatis.caches</groupId>
+       <artifactId>mybatis-ehcache</artifactId>
+       <version>1.2.1</version>
+   </dependency>
+   ```
+
+2. 配置 EhCache
+
+   在 resources 目录下新增`ehcache.xml`文件
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8" ?>
+   <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd"
+            updateCheck="false" monitoring="autodetect" dynamicConfig="true">
+       <diskStore path="C:\Users\xianglin\project\idea-workspace\mybatis\cache"/>
+       <defaultCache maxElementsInMemory="3000"
+                     eternal="false"
+                     copyOnRead="true"
+                     copyOnWrite="true"
+                     timeToIdleSeconds="3600"
+                     timeToLiveSeconds="3600"
+                     overflowToDisk="true"
+                     diskPersistent="true"/>
+   </ehcache>
+   ```
+
+   `copyOnRead` 的含义是，判断从缓存中读取数据时是返回对象的引用还是复制一个对象返回。默认情况下是 `false`，即返回数据的引用，这种情况下返回的都是相同的对象，和 MyBatis 默认缓存中的只读对象是相同的。如果设置为 `true`，那就是可读写缓存，每次读取缓存时都会复制一个新的实例。
+
+   `copyOnWrite` 的含义是，判断写入缓存时是直接缓存对象的引用还是复制一个对象然后缓存，默认也是 `false`。如果想使用可读写缓存，就需要将这两个属性配置为 `true`，如果使用只读缓存，可以不配置这两个属性，使用默认值 `false` 即可。
+
+3. 修改缓存配置
+
+   ```xml
+   <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+   ```
+
+### 集成 `Redis`缓存
+
+MyBatis 项目开发者提供了 `Redis` 的 MyBatis 二级缓存实现，该项目名为` redis-cache`，目前 只有 `beta` 版本，项目地址是 https：//github.com/mybatis/redis-cache。
+
+1. 添加项目依赖
+
+   在`pom.xml`文件中加入如下依赖
+
+   ```xml
+   <dependency>
+       <groupId>org.mybatis.caches</groupId>
+       <artifactId>mybatis-redis</artifactId>
+       <version>1.0.0-beta2</version>
+   </dependency>
+   ```
+
+2. 配置`Redis`
+
+   在 resource 目录下新增`redis.properties`文件
+
+   ```properties
+   redis.host=http://122.51.48.52
+   redis.port=6379
+   redis.connectionTimeout=5000
+   redis.soTimeout=5000
+   redis.password=950915
+   redis.database=0
+   redis.clientName=
+   ```
+
+3. 修改缓存配置
+
+   ```xml
+   <cache type="org.mybatis.caches.redis.RedisCache"/>
+   ```
+
+### 脏数据的产生和避免
+
+MyBatis 的二级缓存是和命名空间绑定的，所以通常情况下每一个 Mapper 映射文件都拥有自己的二级缓存，不同Mapper 的二级缓存互不影响。在常见的数据库操作中，多表联合查询非常常见，由于关系型数据库的设计，使得很多时候需要关联多个表才能获得想要的数据。在关联多表查询时肯定会将该查询放到某个命名空间下的映射文件中，这样一个多表的查询就会缓存在该命名空间的二级缓存中。涉及这些表的增、删、改操作通常不在一个映射文件中，它们的命名空间不同，因此当有数据变化时，多表查询的缓存未必会被清空，这种情况下就会产生脏数据。
+
+当某几个表可以作为一个业务整体时，通常是让几个会关联的 `ER` 表同时使用同一个二级缓存，这样就能解决脏数据问题。
 

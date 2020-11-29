@@ -250,6 +250,22 @@ tags: [java, web]
 * 实现监听器中的独有方法
 * 在`web.xml`对监听器进行配置
 
+
+
+## 重定向与请求转发
+
+* 请求转发是服务器跳转，只会产生一次请求
+* 请求转发语句是：`request.getRequestDispatcher().forward()`
+* 重定向是浏览器端的跳转，会产生两次请求 
+* `Status Code 302` `Location: /sb`
+* 重定向语句是：`response.sendRedirect()`
+
+
+
+## Session原理
+
+
+
 # Freemarker
 
 ## 模板引擎的实现过程
@@ -258,6 +274,8 @@ tags: [java, web]
 * 将数据与展示解耦
 * JSP、Freemarker
 
-## Freemarker 语法
+# HTTP
 
-*略过*
+## HTTP 请求结构
+
+* HTTP 请求包含三个结构：请求行、请求头、请求体

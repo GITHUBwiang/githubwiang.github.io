@@ -275,4 +275,79 @@ ASCII 码对照表
 |  `\ddd`  | 一到三位八进制数表示的任意字符 |          |
 |  `\xhh`  | 十六进制所表示的任意字符       |          |
 
-## Java关键字
+
+
+
+
+# 面试题
+
+## 数字类型
+
+![image-20201123220811706](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202011/220835.png)
+
+## `IEEE754`
+
+## Float 精度问题
+
+```java
+public class FloatDemo {
+    public static void main(String[] args) {
+        float f1 = 423432423F;
+        float f2 = f1 + 1;
+        System.out.println("f1 == f2 :" + (f1 == f2));
+    }
+}
+
+// f1 == f2 :true
+```
+
+
+
+### 生成随机数
+
+```java
+import java.util.Random;
+
+public class RandomDemo {
+    public static void main(String[] args) {
+      	// 生成 300 - 100 的随机数
+        int max = 100;
+        int min = 30;
+        // [30,100)
+        int random = new Random().nextInt(max + 1 - min) + min;
+        System.out.println(random);
+
+        int random2 = (int) (Math.random() * 70 + 30);
+        System.out.println(random2);
+    }
+}
+
+```
+
+
+
+### 求 1-1000 的质数
+
+```java
+public class PrimeNumber {
+    public static void main(String[] args) {
+        // 打印出 1 - 1000 之间的质数
+        int round = 1000;
+        for (int i = 2; i <= round; i++) {
+            boolean prime = true;
+            for (int j = 2; j < i; j++) {
+                if (i % j == 0) {
+                    prime = false;
+                    break;
+                }
+            }
+            if (prime) {
+                System.out.println(i + " 是质数！");
+            }
+        }
+    }
+}
+
+```
+
+

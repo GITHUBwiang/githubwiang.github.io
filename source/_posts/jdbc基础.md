@@ -32,9 +32,9 @@ tags: jdbc
 ### JDBC 使用步骤
 
 1. <s>加载并注册 JDBC 驱动</s>
-2. 创建数据库连接
+2. 创建数据库连接(`Connection`)
 3. 创建 Statement 对象
-4. 执行查询操作
+4. 执行查询操作(`ResultSet`)
 5. 关闭连接对象
 
 ```java
@@ -214,3 +214,12 @@ public static void main(String[] args) throws Exception {
     <version>1.7</version>
   </dependency>
   ```
+
+
+
+## Statement 和 PreparedStatement
+
+* `Statement`用于执行静态SQL 并返回结果
+* `PreparedStatement`用于执行预编译的 SQL 语句。
+* `PreparedStatement`由于预编译使得效率较高
+* `PreparedStatement`可以有效的防止 SQL 注入风险

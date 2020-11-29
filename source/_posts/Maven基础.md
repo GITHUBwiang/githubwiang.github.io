@@ -243,6 +243,8 @@ Maven 项目的核心是`pom.xml`,`POM(Project Object Model)`项目对象模型�
      </build>
    </project>
    ```
+   
+   
 
 * 第一行指定了 XML 文件的版本和编码方式
 * `project`元素是`pom.xml`的根元素
@@ -418,12 +420,11 @@ Maven 项目的核心是`pom.xml`,`POM(Project Object Model)`项目对象模型�
    Hello Maven
    ```
 
-9. 使用Archetype生成项目骨架
+ * 使用Archetype生成项目骨架
 
    ```shell
    mvn archetype:generate
    ```
-
 
 
 
@@ -472,7 +473,7 @@ Maven 坐标为各种构件引入了秩序，任何一个构件都必须明确�
 
 ### 依赖范围
 
-依赖范围就是用来控制依赖与三种 `classpath`（编译 classpath、测试 classpath、运行 classpa）的关系，Maven 中有以下几种依赖范围：
+依赖范围就是用来控制依赖与三种 `classpath`（编译 classpath、测试 classpath、运行 classpath）的关系，Maven 中有以下几种依赖范围：
 
 * `compile`：编译依赖范围，默认值。使用此依赖范围的 Maven 依赖，对于编译、测试、运行三种 classpath 都有效。
 
@@ -495,3 +496,60 @@ Maven 坐标为各种构件引入了秩序，任何一个构件都必须明确�
   ```
 
 * `import`：导入依赖范围。该依赖范围不会对三种 classpath 产生实际的影响。
+
+### 传递性依赖
+
+假设 A 依赖于 B，B 依赖于 C，A 对于 B 是第一直接依赖，B 对于 C 是第二直接依赖，A 对于 C 是传递性依赖。第一直接依赖的范围和第二直接依赖的范围决定了传递性依赖的范围。
+
+如表所示，最左边一行表示第一直接依赖，最上面一行表示第二直接依赖，中间单元格表示传递性依赖范围
+
+|            | `compile`  | `test` | `provided` | `runtime`  |
+| :--------: | :--------: | :----: | :--------: | :--------: |
+| `compile`  | `compile`  |  `--`  |    `--`    | `runtime`  |
+|   `test`   |`test`|`--`|`--`|`test`|
+| `provided` | `provided` |  `--`  | `provided` | `provided` |
+| `runtime`  | `runtime`  |  `--`  |    `--`    | `runtime`  |
+
+### 依赖调解
+
+1. 路径最近者优先
+
+   比如项目A 中有如下依赖：A->B->C->X(1.0)、A->D->X(2.0)，X是 A 的传递性依赖，X(1.0)的路径长度为 3，而 X(2.0)都路径长度为 2，依据路径最近者优先原则，X(2.0)会被项目 A 解析使用。
+
+2. 第一声明者优先
+
+   在依赖路径长度相等的前提下，在 POM 中依赖声明的顺序决定了谁会被解析使用，顺序最靠前的那个依赖优先。
+
+3. 覆盖优先
+
+   在同一 POM 文件中后面声明的依赖会覆盖前面的依赖
+
+### 可选依赖
+
+假设项目 A 依赖于项目B，项目 B依赖于项目 X或 Y，B 对于 X 和 Y 的依赖都是可选依赖，即A->B、B->X(optional)、   B->Y(optional)。由于 X 和 Y是可选依赖，对 A 不会产生任何影响。如图所示
+
+![项目 A](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/234706.png)
+
+### 排除依赖
+
+假设项目 A 依赖于项目 B，项目 B依赖于项目 C，但由于某些原因不想引入传递性依赖C，而是自己显示的声明对项目 C 特定版本的依赖。使用`exclusions`元素声明排除依赖，使用 `exclusion` 时只需要`groupId`和`artifictId`。
+
+```xml
+<dependency>
+  <groupId>ch.qos.logback</groupId>
+  <artifactId>logback-classic</artifactId>
+  <version>1.2.3</version>
+  <exclusions>
+    <exclusion>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </exclusion>
+  </exclusions>
+</dependency>
+<dependency>
+  <groupId>org.slf4j</groupId>
+  <artifactId>slf4j-api</artifactId>
+  <version>1.7.30</version>
+</dependency>
+```
+

@@ -702,3 +702,102 @@ SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
   ```
 
 * Source 命令用于导入 SQL 文件，包括创建数据表、写入记录等
+
+
+
+## SQL 练习
+
+表结构如下：
+
+```sql
+CREATE TABLE `dept`  (
+  `deptno` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `dname` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `loc` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`deptno`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE `emp`  (
+  `empno` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ename` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `job` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `mgr` int(10) UNSIGNED NULL DEFAULT NULL,
+  `hiredate` date NULL DEFAULT NULL,
+  `sal` decimal(10, 2) NULL DEFAULT NULL,
+  `comm` decimal(7, 2) NULL DEFAULT NULL,
+  `deptno` int(10) UNSIGNED NULL DEFAULT NULL,
+  PRIMARY KEY (`empno`) USING BTREE,
+  INDEX `deptno`(`deptno`) USING BTREE,
+  CONSTRAINT `emp_ibfk_1` FOREIGN KEY (`deptno`) REFERENCES `dept` (`deptno`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 8019 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+```
+
+* 按部门编号升序、工资倒序排列员工信息
+
+  ```sql
+  select * from emp order by deptno asc, sal desc;
+  ```
+
+* 列出 deptno=30的部门名称及员工
+
+  ```sql
+  select e.*,d.dname from emp e, dept d where e.deptno = d.deptno and d.deptno = 30;
+  ```
+
+* 列出每个部门最高、最低、平均工资
+
+  ```sql
+  select deptno, max(sal) max, min(sal) min, avg(sal) avg from emp group by deptno; 
+  ```
+
+* 列出市场部 SALES 及研发部RESEARCH的员工
+
+  ```sql
+  select e.*,d.dname from emp e, dept d where e.deptno = d.deptno and d.dname in ('SALES','RESEARCH') ORDER BY d.deptno;
+  ```
+
+* 列出人数超过三人的部门
+
+  ```sql
+  select * from dept d where d.deptno in (select e.deptno from emp e group by e.deptno having count(*) > 3);
+  
+  select d.dname, count(*) from dept d , emp e where d.deptno = e.deptno group by d.dname having count(*) > 3;
+  ```
+
+* 计算 MILLER 年薪比 SMITH 高多少
+
+  ```sql
+  select s.salary - m.salary from 
+  (select e.sal * 12 + ifnull(e.comm,0) salary, e.ename  from emp e where e.ename = 'SMITH') m,
+  (select e.sal * 12 + ifnull(e.comm,0) salary, e.ename  from emp e where e.ename = 'MILLER') s
+  ```
+
+* 列出直接向KING 汇报的员工
+
+  ```sql
+  select * from emp e where e.mgr = (select empno from emp where ename = 'KING');
+  
+  select e.* from emp e,emp e1 where e.mgr = e1.empno and e1.ename = 'KING';
+  
+  select e.* from emp e1 left join emp e on e1.empno = e.mgr where e1.ename = 'KING'; 
+  ```
+
+  
+
+* 列出公司所有员工的工龄，并按倒序排列
+
+  ```sql
+  select e.ename ,ceil(datediff(now(),hiredate)/365) age from emp e order by age
+  ```
+
+  
+
+* 计算管理者与基层员工平均薪资的差距
+
+  ```sql
+  select a.avg - b.avg from 
+  (select avg(sal) avg from emp where job = 'PRESIDENT' or job = 'MANAGER') a,
+  (select avg(sal) avg from emp where job not IN ('PRESIDENT' ,'MANAGER')) b
+  ```
+
+  

@@ -347,3 +347,168 @@ public class SubClass extends BaseClass {
 * 编译后的文件命名：外部类$数字.class
 * 无法使用访问修饰符
 * 无法编写构造方法
+
+
+
+# 面试题
+
+## 面向对象的三大特征
+
+## 接口和抽象类
+
+## 静态变量与实例变量
+
+* 使用`static`关键字定义静态变量
+* 静态变量属于类，不需要依附于实例
+* 静态变量在类加载时初始化与 JVM 的方法区，实例变量在对象创建时初始化与堆内存中
+
+## 代码块的执行顺序
+
+* 静态块优先
+* 父类优先
+* 构造块由于构造函数
+
+```java
+public class OrderDemo {
+    public static void main(String[] args) {
+        new SubClass();
+    }
+}
+
+class Parent {
+
+    Parent() {
+        System.out.println("父类构造器");
+    }
+
+    {
+        System.out.println("父类构造块");
+    }
+
+    static {
+        System.out.println("父类静态块");
+    }
+}
+
+class SubClass extends Parent {
+    SubClass() {
+        System.out.println("子类构造器");
+    }
+
+    {
+        System.out.println("子类构造块");
+    }
+
+    static {
+        System.out.println("子类静态块2");
+    }
+
+    static {
+        System.out.println("子类静态块1");
+    }
+}
+
+/*
+父类静态块
+子类静态块2
+子类静态块1
+父类构造块
+父类构造器
+子类构造块
+子类构造器
+*/
+```
+
+
+
+## Java 的异常体系
+
+### Exception 和 Error 的区别
+
+
+
+## 字符串与常量池
+
+* 字符串不可变与字符串引用不可变是两个概念
+* 可以通过反射改变`value[]`的值，不过没有实际意义
+* JDK9 开始，存储字符串的数组由`private final char[] value` 变为`private final byte[] value`
+
+```java
+import java.lang.reflect.Field;
+
+public class StringDemo {
+    public static void main(String[] args) throws Exception {
+        String str = "abcdefg";
+        System.out.println(str);
+        Field valueField = String.class.getDeclaredField("value");
+        valueField.setAccessible(true);
+      	// java9 
+        byte[] obj = (byte[]) valueField.get(str);
+        obj[0] = (byte) (obj[0] - 32);
+        System.out.println(str);
+    }
+}
+
+// abcdefg
+// Abcdefg
+```
+
+## String、StringBuilder、StringBuffer
+
+* `String` 不可变，使用`final byte[] value`存储字符
+* `StringBuilder`、`StringBuffer`继承自`AbstractStringBuilder`，字符串存储于父类的`byte[] value`
+* `StringBuffer`主要方法均使用`synchronized`保证线程安全
+* `AbstractStringBuilder`并没有实现`equals`方法
+
+
+
+## Java IO
+
+### 从装饰者模式理解 Java IO
+
+### 文件拷贝
+
+```java
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+public class FileCopyDemo {
+
+    public static void main(String[] args) {
+        copyFile("/Users/xianglin/Documents/IdeaProjects/share-mybatis-plugin.zip",
+                "/Users/xianglin/Documents/IdeaProjects/share-mybatis-plugin");
+    }
+
+    public static void copyFile(String srcFilePath, String descDirPath) {
+        File srcFile = new File(srcFilePath);
+        File descDir = new File(descDirPath);
+        if (!srcFile.exists() || !srcFile.isFile()) {
+            return;
+        }
+        if (descDir.isFile()) {
+            return;
+        }
+        if (!descDir.exists()) {
+            if (descDir.mkdirs()) {
+                return;
+            }
+        }
+
+        int index = srcFilePath.lastIndexOf("/");
+        String fileName = srcFilePath.substring(index);
+
+        try (FileInputStream inputStream = new FileInputStream(srcFile);
+                FileOutputStream outputStream = new FileOutputStream(new File(descDir, fileName))) {
+            byte[] bytes = new byte[1024];
+            int length;
+            while ((length = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, length);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+}
+```
+

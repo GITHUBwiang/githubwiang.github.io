@@ -132,7 +132,7 @@ tags: [java, web]
 
 ### Servlet生命周期
 
-1. 装载`web.xml`
+1. 装载--扫描`web.xml`和`@Servlet`注解
 2. 执行构造函数创建实例
 3. 执行初始化方法`init()`进行初始化
 4. 通过`service()`方法提供服务
