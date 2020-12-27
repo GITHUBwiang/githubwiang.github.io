@@ -18,7 +18,7 @@ tags: MySQL
 
 * 通常与 GROUP BY 子句一起使用
 * WHERE 过滤行，HAVING 过滤组
-* 关键字的顺序：WHERE  GROUP BY  HAVING
+* 关键字的顺序：WHERE -- GROUP BY -- HAVING
 
 
 
@@ -44,9 +44,9 @@ MySQL 索引使用的数据结构主要有 BTree 索引和哈希索引。对于�
 ### 密集索引和稀疏索引的区别
 
 * 密集索引文件中的每一个搜索码值都对应一个索引值。
-* 稀疏索引文件只为索引码的某些值建立索引项
+* 稀疏索引文件只为索引码的某些值建立索引项。
 
-InnoDB 的必须仅有一个密集索引，其选取规则如下：
+InnoDB 存储引擎的必须仅有一个密集索引，其选取规则如下：
 
 * 若一个主键被定义，该主键则作为密集索引；
 * 若没有主键被定义，该表的第一个唯一非空索引作为密集索引；
@@ -56,7 +56,7 @@ InnoDB 的必须仅有一个密集索引，其选取规则如下：
 
 ![image-20201227155720085](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227155720085.png)
 
-如图：表 `test.innodb` 使用 InnoDB 引擎，其数据和索引存储在文件 `innodb.ibd` 中；表 `test.myisam` 使用 MyISAM 引擎，其数据文件保存在 `myisam.MYD` 中，索引文件保存在 `myisam.MYI` 中。
+如图：表 `test.innodb` 使用 InnoDB 存储引擎，其数据和索引存储在文件 `innodb.ibd` 中；表 `test.myisam` 使用 MyISAM 存储引擎，其数据文件保存在 `myisam.MYD` 中，索引文件保存在 `myisam.MYI` 中。
 
 ### 如何定位并优化慢查询 SQL
 
@@ -78,7 +78,7 @@ InnoDB 的必须仅有一个密集索引，其选取规则如下：
 
 可以修改 MySQL 的配置文件 `/etc/mysql/my.cnf`，修改这些参数，使其永久有效。
 
-也可以以设置全局变量的方式使其在 MySQL 服务重启前一直生效：
+也可以通过设置全局变量的方式使其在 MySQL 服务重启前一直生效：
 
 ```mysql
 set global long_query_time = 1;
@@ -87,11 +87,11 @@ set global slow_query_log = on;
 
 ![image-20201227163312968](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227163312968.png)
 
-可以使用 `show status like '%show_queries%'` 来查询当前会话的慢 SQL 数：
+可以使用 `show status like '%slow_queries%'` 来查询当前会话的慢 SQL 数：
 
 ![image-20201227162732599](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227162732599.png)
 
-打开慢查询日志 `/var/lib/mysql/manjaro-slow.log`：
+在慢查询日志 `/var/lib/mysql/manjaro-slow.log `中查看慢 SQL 。
 
 
 
@@ -176,7 +176,7 @@ WHERE
 * MySQL 会一直向右匹配直到遇到范围查询（`>` 、`<`、 `between`、 `like`）就停止匹配。比如 `a = 3 and b = 4 and c > 5 and d = 6`，如果建立 `(a, b, c, d)`顺序的索引，则 d 是用不到索引的，如果建立 `(a, b, d, c)` 的索引则都可以用到，且 a b c 的顺序可以任意调整。
 * `=` 和 `in` 可以乱序，比如 `a = 1 and b = 2 and c = 3` 建立`(a, b, c)` 索引可以任意顺序，MySQL 的查询优化器会优化成索引可以识别的形式。
 
-最左匹配原则的成因：如图，创建联合索引时，数据库依据联合索引最左的字段来构建 B+Tree，即会按索引字段顺序对数据排序。比如 a 的值是有序的： 1,1,2,2,3,3 ，B 的值是无序的。当 a 值相等时，b 的值是有序的。所以最左匹配原则遇上范围查询就会停止，剩下的字段都无法使用索引。
+最左匹配原则的成因：如图，创建联合索引时，数据库依据联合索引最左的字段来构建 B+Tree，即会按索引字段顺序对数据排序。比如 a 的值是有序的： 1,1,2,2,3,3 ，B 的值是无序的。当 a 值相等时，b 的值是有序的。所以最左匹配原则遇上范围查询就会停止，因为在一个范围中，剩下的字段不是有序的，剩下的字段都无法使用索引。
 
 ![image-20201227172424787](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227172424787.png)
 
