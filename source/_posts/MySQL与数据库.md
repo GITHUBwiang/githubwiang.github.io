@@ -2,7 +2,7 @@
 title: MySQL与数据库
 date: 2020-09-06 22:55:14
 categories: learn
-tags: mysql
+tags: MySQL
 ---
 
 # MySQL
