@@ -5,6 +5,8 @@ categories: learn
 tags: redis
 ---
 
+![Redis 缓存](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/Redis%E7%BC%93%E5%AD%98.png)
+
 ## Redis 介绍
 
 ### Redis 简介
@@ -69,8 +71,12 @@ Redis 支持 100000+QPS。
 
 * 完全基于内存，绝大部分请求是纯粹的内存操作，执行效率高
 * 数据结构简单，对数据操作也简单
-* 采用单线程，单线程能处理高并发请求，
+* 采用单线程，单线程能处理高并发请求
 * 使用 I/O 多路复用，Redis 使用的 I/O 多路复用函数：epoll、kqueue、evport
+
+传统的阻塞 I / O 模型
+
+![image-20210116223341983](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/image-20210116223341983.png)
 
 ### Redis 数据类型
 
@@ -149,6 +155,8 @@ Redis 支持 100000+QPS。
   发送者 pub 发送消息，订阅者 sub 接收消息；订阅者可以订阅任意数量的频道。
 
   缺点：消息的发布是无状态的，无法保证可达。
+  
+  ![image-20210117114605047](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/image-20210117114605047.png)
 
 ### Redis 持久化
 
@@ -175,6 +183,7 @@ Redis 支持 100000+QPS。
   * 记录下除了查询以外的所有变更数据库状态的指令。
   * 以 append 的形式追加保存到 AOF 文件中。
   * 使用 `appendonly yes` 配置开启 AOF 持久化。
+  * `appendfsync everysec`
 
   日志重写解决 AOF 文件不断增大的问题：
 
@@ -197,6 +206,8 @@ Redis 支持 100000+QPS。
 
 ### 为什么使用 Pipline
 
+Redis 是一种基于客户端-服务端模型及请求/响应协议的 TCP 服务，Pipeline 批量执行指令，节省 IO 时间。
+
 ### Redis 的同步机制
 
 * 全同步过程
@@ -206,13 +217,13 @@ Redis 支持 100000+QPS。
     * Master 将保存数据快照期间接收到的写命令缓存起来
     * Master 完成写文件操作后，将该文件发送给 Slave
     * Slave 使用新的 RDB 文件替换掉旧的 RDB 文件，并根据其恢复到内存中
-    * Master 将这期间收集的增量写命令发送给 Slave 段
+    * Master 将这期间收集的增量写命令发送给 Slave 端
 
 * 增量同步过程
 
     * Master 接受到用户的操作指令，判断是否需要传播到 Slave
     * 将该操作记录追加到 AOF 文件
-    * 将操作传播到其他 Slave：1. 对其主从库；2. 往响应缓存写入指令
+    * 将操作传播到其他 Slave：1. 对齐主从库；2. 往响应缓存写入指令
     * 将缓存中的数据发送给 Slave
 
 * Redis Sentinel
@@ -228,3 +239,7 @@ Redis 支持 100000+QPS。
 * 一致性哈希算法：对 2^32 取模，将哈希值空间组成虚拟的圆环。
 * 将数据 key 使用相同的 hash 函数计算出哈希值。
 * 引入虚拟节点解决数据倾斜的问题。
+
+#### Redis 集群的数据分片
+
+Redis 集群有 16384 个哈希槽，每个 key 通过 CRC16 校验后对 16384 取模来决定放置在哪个槽，集群中的每个节点负责一部分哈希槽。

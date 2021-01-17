@@ -33,7 +33,7 @@ tags: MySQL
 
 * DML：数据操作语言
 * DCL：数据控制语言
-* DDL
+* DDL：数据定义语言
 * SQL 语句的注意事项
   1. SQL 语句不区分大小写
   2. SQL 语句必须以分号结尾
@@ -77,7 +77,7 @@ show tables;
 desc student;
 # 查看建表语句
 show create table student;
-# 删除表结构
+# 删除表
 drop table student;
 ```
 
@@ -90,7 +90,7 @@ alter table student
     add address  VARCHAR(200) not null,
     add home_tel CHAR(11)     not null;
 
-# 修改表字段
+# 修改表字段属性
 alter table student
     modify home_tel VARCHAR(20) not null;
 
@@ -112,38 +112,39 @@ desc student;
 
 ### 数据类型
 
-* 数字
+* 数值型
 
-  | 类型      | 大小（字节） | 说明          |
-  | --------- | ------------ | ------------- |
-  | TINYINT   | 1            |               |
-  | SMALLINT  | 2            |               |
-  | MEDIUMINT | 3            |               |
-  | INT       | 4            |               |
-  | BIGINT    | 8            |               |
-  | FLOAT     | 4            | 单精度浮点数  |
-  | DOUBLE    | 8            | 双精度浮点数  |
-  | DECIMAL   |              | DECIMAL(10,2) |
+  | 类型      | 大小（字节） | 范围（有符号）            | 范围（无符号）  | 说明                                     |
+  | --------- | ------------ | ------------------------- | --------------- | ---------------------------------------- |
+  | TINYINT   | 1            | [-128, 127]               | [0, 255]        | 小整型值                                 |
+  | SMALLINT  | 2            | [-32768, 32767]           | [0, 65535]      |                                          |
+  | MEDIUMINT | 3            |                           |                 |                                          |
+  | INT       | 4            | [-2147483648, 2147483647] | [0, 4294967295] |                                          |
+  | BIGINT    | 8            |                           |                 |                                          |
+  | FLOAT     | 4            |                           |                 | 单精度浮点数                             |
+  | DOUBLE    | 8            |                           |                 | 双精度浮点数                             |
+  | DECIMAL   | DECIMAL(M,D) |                           |                 | 对DECIMAL(M,D) ，如果M>D，为M+2否则为D+2 |
 
-* 字符串
+* 字符串类型
 
-  | 类型       | 大小（字符） | 说明             |
-  | ---------- | ------------ | ---------------- |
-  | CHAR       | 1-255        | 固定长度字符串   |
-  | VARCHAR    | 1-65535      | 不固定长度字符串 |
-  | TEXT       | 1-65535      | 不确定长度字符串 |
-  | MEDIUMTEXT |              |                  |
-  | LONGTEXT   |              |                  |
+  | 类型    | 大小（字符） | 说明                   |
+  | ------- | ------------ | ---------------------- |
+  | CHAR    | 1 - 255      | 定长字符串             |
+  | VARCHAR | 1 - 65535    | 变长字符串             |
+  | TEXT    | 1 - 65535    | 长文本数据             |
+  | BLOB    | 1 - 65535    | 二进制形式的长文本数据 |
 
-* 日期类型
+  *char(n) 和 varchar(n) 中括号中 n 代表字符的个数，并不代表字节个数，比如 CHAR(30) 就可以存储 30 个字符。*
 
-  | 类型      | 大小（字节） | 说明     |
-  | --------- | ------------ | -------- |
-  | DATE      | 3            | 日期     |
-  | TIME      | 3            | 时间     |
-  | YEAR      | 1            | 年份     |
-  | DATETIME  | 8            | 日期时间 |
-  | TIMESTAMP | 4            | 时间戳   |
+* 日期/时间类型
+
+  | 类型      | 大小（字节） | 范围                                      | 格式                | 说明             |
+  | --------- | ------------ | ----------------------------------------- | ------------------- | ---------------- |
+  | DATE      | 3            | 1000-01-01 / 9999-12-31                   | YYYY-MM-DD          | 日期值           |
+  | TIME      | 3            | -838:59:59 / 838:59:59                    | HH:MM:SS            | 时间值或持续时间 |
+  | YEAR      | 1            | 1901 / 2155                               | YYYY                | 年份值           |
+  | DATETIME  | 8            | 1000-01-01 00:00:00 / 9999-12-31 23:59:59 | YYYY-MM-DD HH:MM:SS | 日期时间         |
+  | TIMESTAMP | 4            |                                           | YYYYMMDD HHMMSS     | 时间戳           |
 
 ### 关系型数据库三范式
 
@@ -332,11 +333,11 @@ where sal >= 2000
 group by deptno;
 ```
 
-### 表链接查询
+### 表连接查询
 
 * 表连接分为两种：内连接和外连接
 
-* 内连接用于查询多张关系表满足链接条件的记录
+* 内连接用于查询多张关系表满足连接条件的记录
 
 * 内连接的多种语法形式
 
@@ -396,7 +397,7 @@ group by deptno;
 
 ## MySQL对数据的基本操作
 
-### 数据添加`INSERT`
+### 数据添加 `INSERT`
 
 ```sql
 insert into tableName(col1,clo2,...) values(value1,value2,...),(value1,value2,...);
@@ -412,7 +413,7 @@ insert into t_emp
 VALUES (8001, '李娜', 'SALESMAN', 8000, '1988-12-20', 200, null, (select deptno from t_dept where dname = '技术部'));
 ```
 
-MySQL 的INSERT语句方言
+MySQL 的 INSERT 语句方言
 
 ```sql
 insert [into] tableName set col1 = value1,col2 = value2;
@@ -423,7 +424,7 @@ set deptno = 8000,
     loc    = '上海';
 ```
 
-IGNORE 关键字会让 INSERT只插入数据库不存在的记录
+IGNORE 关键字会让 INSERT 只插入数据库不存在的记录
 
 ```sql
 insert ignore into t_dept (deptno, dname, loc)
@@ -438,11 +439,9 @@ set col1 = value1, col2 = value2,...
 [where condition]
 [order by ...]
 [limit ...];
-
-
 ```
 
-* UPDATE 语句的表链接
+* UPDATE 语句的表连接
 
 * 表链接的 UPDATE 语句可以修改多张表的记录
 
@@ -473,7 +472,6 @@ set col1 = value1, col2 = value2,...
      or (d.dname = 'SALES' and e.sal < 2000);
   ```
 
-  
 
 ### 数据删除
 
@@ -492,7 +490,7 @@ order by sal + ifnull(comm, 0) desc
 limit 1;
 ```
 
-* DELETE 语句可以引入表链接
+* DELETE 语句可以引入表连接
 
   ```sql
   DELETE table1 ,... FROM table1 JOIN table2 ON codition
@@ -693,15 +691,15 @@ SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
 * 数据备份，备份数据文件、日志文件、索引文件等等
 
-* MySQLDump 用来把业务数据导出成 SQL 文件
+* `mysqldump` 用来把业务数据导出成 SQL 文件
 
   ```sql
-  Mysqldump -uroot -p [no-data] database > path
+  mysqldump -uroot -p [no-data] database > path
   
   mysqldump -uxianglin -p mybatis > mybatis.sql
   ```
 
-* Source 命令用于导入 SQL 文件，包括创建数据表、写入记录等
+* `source` 命令用于导入 SQL 文件，包括创建数据表、写入记录等。
 
 
 
@@ -782,15 +780,11 @@ CREATE TABLE `emp`  (
   select e.* from emp e1 left join emp e on e1.empno = e.mgr where e1.ename = 'KING'; 
   ```
 
-  
-
 * 列出公司所有员工的工龄，并按倒序排列
 
   ```sql
   select e.ename ,ceil(datediff(now(),hiredate)/365) age from emp e order by age
   ```
-
-  
 
 * 计算管理者与基层员工平均薪资的差距
 

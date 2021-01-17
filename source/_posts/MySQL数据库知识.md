@@ -5,6 +5,8 @@ categories: interview
 tags: MySQL
 ---
 
+![关系型数据库](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93.png)
+
 ## 数据库模块划分
 
 ## 关键语法
@@ -19,8 +21,6 @@ tags: MySQL
 * 通常与 GROUP BY 子句一起使用
 * WHERE 过滤行，HAVING 过滤组
 * 关键字的顺序：WHERE -- GROUP BY -- HAVING
-
-
 
 ## 索引相关内容
 
@@ -93,9 +93,9 @@ set global slow_query_log = on;
 
 在慢查询日志 `/var/lib/mysql/manjaro-slow.log `中查看慢 SQL 。
 
-
-
 使用 `explain` 分析 SQL 执行计划：
+
+[MySQL索引原理及慢查询优化](https://tech.meituan.com/2014/06/30/mysql-index.html)
 
 ```sql
 explain select name from person_info_large order by name desc;
@@ -105,13 +105,11 @@ explain select name from person_info_large order by name desc;
 
 主要需要关注的字段有：
 
-`id`：
+`id`：执行编号
 
-`type`：
+`type`：访问类型
 
-`extra`：
-
-
+`extra`：查询优化器对查询计划的补充信息
 
 ### 联合索引的最作匹配原则
 
@@ -173,7 +171,7 @@ WHERE
 
 最左前缀匹配原则是指：
 
-* MySQL 会一直向右匹配直到遇到范围查询（`>` 、`<`、 `between`、 `like`）就停止匹配。比如 `a = 3 and b = 4 and c > 5 and d = 6`，如果建立 `(a, b, c, d)`顺序的索引，则 d 是用不到索引的，如果建立 `(a, b, d, c)` 的索引则都可以用到，且 a b c 的顺序可以任意调整。
+* MySQL 会一直向右匹配直到遇到范围查询（`>` 、`<`、 `between`、 `like`）就停止匹配。比如 `a = 3 and b = 4 and c > 5 and d = 6`，如果建立 `(a, b, c, d)`顺序的索引，则 d 是用不到索引的，如果建立 `(a, b, d, c)` 的索引则都可以用到，且 a b d 的顺序可以任意调整。
 * `=` 和 `in` 可以乱序，比如 `a = 1 and b = 2 and c = 3` 建立`(a, b, c)` 索引可以任意顺序，MySQL 的查询优化器会优化成索引可以识别的形式。
 
 最左匹配原则的成因：如图，创建联合索引时，数据库依据联合索引最左的字段来构建 B+Tree，即会按索引字段顺序对数据排序。比如 a 的值是有序的： 1,1,2,2,3,3 ，B 的值是无序的。当 a 值相等时，b 的值是有序的。所以最左匹配原则遇上范围查询就会停止，因为在一个范围中，剩下的字段不是有序的，剩下的字段都无法使用索引。
@@ -283,7 +281,7 @@ InnoDB 使合的场景
 
 当前读和快照读
 
-当前读：
+当前读：加了锁的 SQL 语句，读取的是记录的最新版本，且其它事务无法修改记录。
 
 ```sql
 select ... lock in share mode; 
@@ -295,13 +293,13 @@ insert
 
 快照读：不加锁的非阻塞读，基于 MVCC 实现。
 
-next-key 锁（行锁+Gap 锁）
+next-key 锁（行锁 + Gap 锁）
 
 行锁
 
-Gap 锁
+Gap 锁：如果 where 条件全部命中，则不会加 Gap 锁。
 
-
+Gap 锁会用在非唯一索引和无索引的当前读中。
 
 ## 数据库理论知识
 

@@ -35,15 +35,15 @@ MySQL中事务的四大特性包括：**原子性（Atomicity）**、**一致性
 | `REPEATABLE READ`  | 事务不会读到其它事务对数据的更改     |
 | `SERIALIZABLE`     | 将事务的执行变为顺序执行             |
 
-* MySQL使用事务
+* MySQL 使用事务
 
-  开启事务：`begin / start transaction`
+  开启事务：`begin / start transaction / set autocommit = 0`
 
   提交事务：`commit`
 
   回滚事务：`rollback`
 
-  *在执行`begin/start transaction`命令时，它们并不是一个事务的起点，在执行完它们后的第一个sql语句，才表示事务真正的启动 。*
+  *在执行`begin/start transaction`命令时，它们并不是一个事务的起点，在执行完它们后的第一个 sql 语句，才表示事务真正的启动 。*
 
 * 查看当前数据库的隔离级别
 

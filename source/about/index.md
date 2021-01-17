@@ -14,12 +14,12 @@ layout: about
 # 个人信息
 
  - 向林 / 男 / 1996 
- - 本科 / 重庆交通大学计算机科学与技术 
+ - 本科 / 重庆交通大学计算机科学与技术专业 
  - 工作年限：2年
- - 技术博客：https://xianglin.store
+ - 技术博客：https://blog.xianglin.store
  - Github：https://github.com/xianglin2020
 
- - 期望职位：Java中级程序员
+ - 期望职位：Java 中级程序员
  - 期望城市：广州、武汉、重庆
 
 ---
@@ -49,19 +49,25 @@ layout: about
 - [MyBatis 插件原理及 PageHelper 介绍](/2020/10/31/MyBatis拦截器/)
 
 # 技能清单
-以下均为我熟练使用的技能
+以下是我熟悉和了解的技能
 
-- 数据库相关：MySQL/PgSQL/PDO/SQLite
-- 版本管理、文档和自动化部署工具：Svn / Git / Jenkins
-- 云和开放平台：SAE/BAE/AWS/微博开放平台/微信应用开发
+- 计算机网络、操作系统、数据结构和算法等课内基础知识：掌握
+- Java 基础知识、集合、I/O、多线程：掌握
+- JVM 基础、GC 基础：掌握
+- SQL 语法、MySQL 索引、事务、MySQL 常见优化手段：掌握
+- Spring、Spring MVC、MyBatis：熟悉
+- 前端基础、jQuery、Ajax：熟悉
+- RabbitMQ、Dubbo、Zookeeper：了解
+- Spring Boot、Spring Cloud、Docker：了解
+- 熟悉 Linux 使用和常用命令，能基于 Linux Desktop 开发。
 
 ## 参考技能关键字
 
-- java
-- spring
-- mysql
-- linux
-- mybatis
+- Java
+- Spring
+- MySQL
+- Linux
+- MyBatis
 
 
 ---
