@@ -3,6 +3,7 @@ title: Nginx
 date: 2020-12-03 20:39:51
 categories: learn
 tags: nginx
+index_img: https://nginx.org/nginx.png
 ---
 
 # Nginx

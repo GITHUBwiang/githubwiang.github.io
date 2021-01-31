@@ -3,6 +3,7 @@ title: Redis基础
 date: 2020-10-03 20:53:49
 categories: learn
 tags: redis
+index_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/Redis%E7%BC%93%E5%AD%98.png
 ---
 
 ![Redis 缓存](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/Redis%E7%BC%93%E5%AD%98.png)

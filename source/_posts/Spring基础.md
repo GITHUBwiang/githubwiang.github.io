@@ -13,15 +13,15 @@ tags: spring
 
 ### IOC：控制反转
 
-* IOC 控制反转，全称 Inverse of Control，是一种设计理念
-* 由代理人来创建与管理对象，消费者通过代理人获取对象
-* IoC 的目的是降低对象之间的直接耦合
+* IOC 控制反转，全称 Inverse of Control，是一种设计理念。
+* 由代理人来创建与管理对象，消费者通过代理人获取对象。
+* IoC 的目的是降低对象之间的直接耦合。
 
 ### DI：依赖注入
 
-* IOC 是设计理念，是现代程序设计遵循的标准，是宏观目标
-* DI（Dependency Injection）是具体技术实现
-* DI 在 Java 中利用反射技术实现对象注入
+* IOC 是设计理念，是现代程序设计遵循的标准，是宏观目标。
+* DI（Dependency Injection）是具体技术实现。
+* DI 在 Java 中利用反射技术实现对象注入。
 
 ### Bean 配置方式
 
@@ -188,7 +188,6 @@ Object getBean(String var1, Object... var2) throws BeansException;
    </bean>
    ```
 
-   
 
 ### Bean 作用域
 

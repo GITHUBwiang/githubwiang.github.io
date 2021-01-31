@@ -3,6 +3,7 @@ title: start-new-year
 date: 2020-09-06 22:39:52
 tags: daily
 categories: daily
+index_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/212557.jpg
 ---
 
 都说程序员应该写写博客、文章，记录自己的成长。一方面总结自己、一方面给后者提供参考。之前做过这样的事，但因为某些原因没有坚持下去，现在想着再继续写博客。

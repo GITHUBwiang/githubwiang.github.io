@@ -3,6 +3,7 @@ title: VirtualBox
 date: 2020-10-04 21:16:32
 categories: daily
 tags: virtual box
+index_img: https://www.virtualbox.org/graphics/button61.png
 ---
 
 # VirtualBox

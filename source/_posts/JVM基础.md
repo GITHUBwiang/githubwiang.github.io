@@ -3,6 +3,7 @@ title: JVM基础
 date: 2021-01-17 14:55:05
 tags: jvm
 categories: interview
+index_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/JVM.png
 ---
 
 # JVM 基础
@@ -110,3 +111,5 @@ Java 平台无关性是建立在 Java 虚拟机的平台有关性基础之上的
 ### String 的 intern() 方法在 JDK6 和以后的区别
 
 **JDK7 字符串常量池从永久代移动到堆中。**
+
+### TODO

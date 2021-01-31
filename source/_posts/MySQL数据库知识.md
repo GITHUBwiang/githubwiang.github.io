@@ -3,6 +3,7 @@ title: MySQL数据库知识
 date: 2020-12-26 18:58:00
 categories: interview
 tags: MySQL
+index_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93.png
 ---
 
 ![关系型数据库](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93.png)

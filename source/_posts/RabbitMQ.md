@@ -3,6 +3,7 @@ title: RabbitMQ
 date: 2020-12-05 13:20:00
 catefories: learn
 tags: mq
+index_img: https://www.rabbitmq.com/img/logo-rabbitmq.svg
 ---
 
 # RabbitMQ
