@@ -23,7 +23,7 @@ Redis Sentinel 是一个分布式系统，可以在一个架构中运行多个 S
 
 先复制三个配置文件，分别为`master.conf`、`slave1.conf`、`slave2.conf`，修改对应的 `port` 和 `deamon yes` 配置，如图：
 
-<img src="/Users/xianglin/Library/Application Support/typora-user-images/image-20210227113811536.png" alt="image-20210227113811536" style="zoom: 50%;" />
+![conf](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202102/121329.png)
 
 然后使用如下命令启动 master 进程：
 
