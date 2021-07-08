@@ -106,4 +106,4 @@ deploy:
   type: 'git'
   repo: https://github.com/xianglin2020/xianglin2020.github.io
   branch: gh-page
-  token: "0f61eebcdc617d72e0a3f93ac7bf3894a308bf71"
+  token: "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"
