@@ -1,6 +1,5 @@
 ---
-layout: docker
-title: Oracle-11g
+title: Docker 安装 Oracle-11g
 date: 2021-04-06 10:18:12
 tags: docker
 categories: learn
