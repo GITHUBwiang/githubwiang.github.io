@@ -1,5 +1,6 @@
 ---
 title: Java反射
+excerpt: 反射是在运行时动态访问类与对象的技术。
 date: 2020-09-12 18:23:05
 categories: learn
 tags: java

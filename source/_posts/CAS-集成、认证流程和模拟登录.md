@@ -1,5 +1,6 @@
 ---
 title: CAS 集成、认证流程和模拟登录
+excerp: CAS 集成、认证流程和模拟登录分享。
 date: 2021-07-03 15:48:55
 tags: [cas, java]
 categories: work record

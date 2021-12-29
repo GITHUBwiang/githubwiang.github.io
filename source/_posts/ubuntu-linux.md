@@ -1,5 +1,6 @@
 ---
 title: ubuntu-linux
+excerpt: Linux 发展至今，已经是一个相当复杂和丰富的操作系统了，其大部分源代码还是 GNU 项目的。
 date: 2020-09-06 22:45:23
 tags: linux
 categories: learn
