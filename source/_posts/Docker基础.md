@@ -332,5 +332,27 @@ index_img: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Docker_%28c
   hello my dockerfile
   ```
 
-  
 
+## 常用软件工具的 docker 命令
+
+https://hub.docker.com/
+
+* 在 Docker 实例中安装软件包
+
+  ```shell
+  # 登入容器
+  docker exec -it 7ec9e6cf98a9 bash
+  # 替换源
+  sed -i s@/deb.debian.org/@/mirrors.163.com/@g /etc/apt/sources.list
+  # 更新源、安装软件
+  apt update
+  apt install vim
+  ```
+
+* MySQL
+
+  ```shell
+  docker run --name mysql-dev -e MYSQL_ROOT_PASSWORD=12345678 -e MYSQL_DATABASE=dev -e MYSQL_USER=dev -e MYSQL_PASSWORD=password -p 3306:3306 -d mysql:latest
+  ```
+
+  
