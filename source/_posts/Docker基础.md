@@ -4,7 +4,7 @@ excerpt: Docker 是一个用来装程序及其环境的容器，属于Linux 容�
 date: 2020-12-01 22:38:26
 categories: learn
 tags: docker
-index_img: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Docker_%28container_engine%29_logo.svg/220px-Docker_%28container_engine%29_logo.svg.png
+banner_img: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Docker_%28container_engine%29_logo.svg/220px-Docker_%28container_engine%29_logo.svg.png
 ---
 
 # Docker

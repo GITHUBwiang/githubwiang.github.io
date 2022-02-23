@@ -5,7 +5,7 @@ layout: about
 ---
 
 # 联系方式
-- 手机：17328332605
+- 手机：15360056461
 - Email：xianglin2020@outlook.com
 - 微信号：xxxxxianglin
 
@@ -15,7 +15,7 @@ layout: about
 
  - 向林 / 男 / 1996 
  - 本科 / 重庆交通大学计算机科学与技术专业 
- - 工作年限：2年
+ - 工作年限：3 年
  - 技术博客：https://blog.xianglin.store
  - Github：https://github.com/xianglin2020
 

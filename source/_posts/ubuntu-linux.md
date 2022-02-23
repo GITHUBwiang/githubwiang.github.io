@@ -4,7 +4,7 @@ excerpt: Linux 发展至今，已经是一个相当复杂和丰富的操作系�
 date: 2020-09-06 22:45:23
 tags: linux
 categories: learn
-index_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/224547.jpg
+banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/224547.jpg
 ---
 
 # Linux 介绍

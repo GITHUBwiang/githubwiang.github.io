@@ -3,7 +3,7 @@ title: Ubuntu安装MySQL
 date: 2020-10-10 22:44:19
 categories: daily
 tags: [ubuntu, mysql]
-index_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/212642.png
+banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/212642.png
 ---
 
 # Ubuntu 安装 MySQL

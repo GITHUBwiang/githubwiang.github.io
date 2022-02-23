@@ -4,7 +4,7 @@ excerpt: JVM 基础知识和一些面试题。
 date: 2021-01-17 14:55:05
 tags: jvm
 categories: interview
-index_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/JVM.png
+banner_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/JVM.png
 ---
 
 # JVM 基础

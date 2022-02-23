@@ -4,7 +4,7 @@ excerpt: 使用 VirtualBox 安装 Windows11。
 date: 2021-11-17 14:46:04
 categories: daily
 tags: virtual box
-index_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202111/290945.jpeg
+banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202111/290945.jpeg
 ---
 
 # 使用 VirtualBox 安装 Windows11

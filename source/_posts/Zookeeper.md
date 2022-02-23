@@ -3,7 +3,7 @@ title: Zookeeper
 date: 2020-12-13 13:25:23
 categories: learn
 tags: Zookeeper
-index_img: https://zookeeper.apache.org/images/zookeeper_small.gif
+banner_img: https://zookeeper.apache.org/images/zookeeper_small.gif
 ---
 
 # Zookeeper

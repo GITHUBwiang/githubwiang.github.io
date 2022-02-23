@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: XiangLin
+title: Daily Record for Lin
 subtitle: 'some page for daily!'
 description: '记录一些学习工作中的知识技能，方便后续查阅！'
 keywords: Java 
@@ -106,4 +106,4 @@ deploy:
   type: 'git'
   repo: 'git@github.com:xianglin2020/xianglin2020.github.io.git'
   branch: gh-page
-  token: "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"
+  token: ""

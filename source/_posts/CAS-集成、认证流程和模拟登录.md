@@ -4,7 +4,7 @@ excerp: CAS 集成、认证流程和模拟登录分享。
 date: 2021-07-03 15:48:55
 tags: [cas, java]
 categories: work record
-index_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/2021-10/155324.png
+banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/2021-10/155324.png
 ---
 
 # CAS 集成、认证流程和模拟登录
