@@ -9,7 +9,7 @@ tags: spring boot
 
 ## SpringBoot 过滤器使用
 
-### 两者注册过滤器的方式
+### 两种注册过滤器的方式
 
 #### 使用`FilterRegistrationBean`注册过滤器
 

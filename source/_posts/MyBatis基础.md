@@ -74,21 +74,21 @@ MyBatis 内置日志工厂会基于运行时检测信息选择日志委托实现
 
   
 
-*  `NoLoggingImpl`中的所有方法都未实现，即为禁用日志功能。
+* `NoLoggingImpl`中的所有方法都未实现，即为禁用日志功能。
 
-```java
-public class NoLoggingImpl implements Log {
-
-  public NoLoggingImpl(String clazz) {
-    // Do Nothing
-  }
+  ```java
+  public class NoLoggingImpl implements Log {
   
-    @Override
-  public void error(String s, Throwable e) {
-    // Do Nothing
+    public NoLoggingImpl(String clazz) {
+      // Do Nothing
+    }
+    
+      @Override
+    public void error(String s, Throwable e) {
+      // Do Nothing
+    }
   }
-}
-```
+  ```
 
 * 可以在MyBatis 配置文件`mybatis-config.xml` 中使用`setting`标签来指定 MyBatis 的日志实现
 
@@ -231,9 +231,9 @@ public class NoLoggingImpl implements Log {
 
 #### `where`用法
 
-`where`标签的作用：如果该标签包含的元素中有返回值，就插入一个`where`；如果`where`后面的字符串是以`AND`和`OR`开头的，就将它们剔除。
+`where` 标签的作用：如果该标签包含的元素中有返回值，就插入一个`where`；如果`where`后面的字符串是以`AND`和`OR`开头的，就将它们剔除。
 
-修改上述[在`WHERE`中使用`if`]的 SQL 语句。
+修改上述 [在`WHERE`中使用`if`] 的 SQL 语句：
 
 ```xml
 <select id="selectByUser" resultType="SysUser">
@@ -253,7 +253,7 @@ public class NoLoggingImpl implements Log {
 
 `set`标签的作用：如果该标签包含的元素中有返回值，就插入一个`set`；如果`set`后面的字符串是以逗号结尾的，就剔除这个逗号。
 
-修改上述[在`UPDATE`中使用`if`]的 SQL 语句。
+修改上述 [在`UPDATE`中使用`if`] 的 SQL 语句：
 
 ```xml
 <update id="updateByIdSelective">
@@ -287,12 +287,12 @@ public class NoLoggingImpl implements Log {
 
 #### `trim`用法
 
-`where`和`set`标签的功能都可以用`trim`标签来实现，并且在底层就是通过`TrimSqlNode`实现的。
+`where` 和 `set` 标签的功能都可以用 `trim` 标签来实现，并且在底层就是通过 `TrimSqlNode` 实现的。
 
-`where`标签对应的`trim`实现如下：
+`where` 标签对应的 `trim` 实现如下：
 
 ```xml
-<trim prefix="WHERE" prefixOverrides="AND |OR ">
+<trim prefix="WHERE" prefixOverrides="AND | OR ">
 ...
 </trim>
 ```
@@ -413,7 +413,7 @@ SQL 语句中会使用`IN`关键字，例如`id in (1, 2, 3)`，可以使用`${i
 
 ### 一级缓存
 
-MyBatis 的一级缓存存在于 `SqlSession` 的生命周期中，在同一个` SqlSession` 中查询时，MyBatis 会把执行的方法和参数通过算法生成缓存的键值，将键值和查询结果存入一个 `Map` 对象中。如果同一个 `SqlSession` 中执行的方法和参数完全一致，那么通过算法会生成相同的键值，当 `Map` 缓存对象中已经存在该键值时，则会返回缓存中的对象。任何的 `INSERT`、 `UPDATE`、`DELETE` 操作都会清空一级缓存。也可以在`select`标签中添加`flushCache="true"`元素，让 MyBatis 在查询数据前清空当前的一级缓存。
+MyBatis 的一级缓存存在于 `SqlSession` 的生命周期中，在同一个`SqlSession` 中查询时，MyBatis 会把执行的方法和参数通过算法生成缓存的键值，将键值和查询结果存入一个 `Map` 对象中。如果同一个 `SqlSession` 中执行的方法和参数完全一致，那么通过算法会生成相同的键值，当 `Map` 缓存对象中已经存在该键值时，则会返回缓存中的对象。任何的 `INSERT`、 `UPDATE`、`DELETE` 操作都会清空一级缓存。也可以在`select`标签中添加`flushCache="true"`元素，让 MyBatis 在查询数据前清空当前的一级缓存。
 
 
 * 一级缓存实现
@@ -634,7 +634,7 @@ DEBUG [main] - Cache Hit Ratio [person.xianglin.simple.mapper.RoleMapper]: 0.5
 
 ### 集成`EhCache`缓存
 
-MyBatis 项目开发者最早提供了 `EhCache` 的 MyBatis 二级缓存实现， 该项目名为 `ehcache-cache`，地址是 https//github.com/mybatis/ehcache-cache。
+MyBatis 项目开发者最早提供了 `EhCache` 的 MyBatis 二级缓存实现， 该项目名为 `ehcache-cache`，地址是 [https://github.com/mybatis/ehcache-cache](https://github.com/mybatis/ehcache-cache)。
 
 1. 添加项目依赖
 
@@ -680,7 +680,7 @@ MyBatis 项目开发者最早提供了 `EhCache` 的 MyBatis 二级缓存实现�
 
 ### 集成 `Redis`缓存
 
-MyBatis 项目开发者提供了 `Redis` 的 MyBatis 二级缓存实现，该项目名为` redis-cache`，目前 只有 `beta` 版本，项目地址是 https：//github.com/mybatis/redis-cache。
+MyBatis 项目开发者提供了 `Redis` 的 MyBatis 二级缓存实现，该项目名为` redis-cache`，目前 只有 `beta` 版本，项目地址是 [https://github.com/mybatis/redis-cache](https://github.com/mybatis/redis-cache)。
 
 1. 添加项目依赖
 
