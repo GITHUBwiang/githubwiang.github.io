@@ -1,5 +1,5 @@
 ---
-title: MyBatis基础
+title: MyBatis 基础
 date: 2020-09-15 21:41:19
 categories: learn
 tags: mybatis

@@ -1,5 +1,5 @@
 ---
-title: Spring基础
+title: Spring 基础
 date: 2020-10-04 18:08:53
 categories: learn
 tags: spring

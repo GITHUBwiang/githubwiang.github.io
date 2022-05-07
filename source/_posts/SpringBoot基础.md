@@ -1,5 +1,5 @@
 ---
-title: SpringBoot基础
+title: SpringBoot 基础
 date: 2020-10-19 22:18:41
 categories: learn
 tags: spring boot

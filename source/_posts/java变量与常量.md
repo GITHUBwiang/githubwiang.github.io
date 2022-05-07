@@ -1,5 +1,5 @@
 ---
-title: java变量与常量
+title: java 变量与常量
 date: 2020-09-06 22:49:20
 categories: learn
 tags: java
@@ -349,5 +349,4 @@ public class PrimeNumber {
 }
 
 ```
-
 

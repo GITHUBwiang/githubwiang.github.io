@@ -1,5 +1,5 @@
 ---
-title: MyBatis拦截器
+title: MyBatis 拦截器
 date: 2020-10-31 22:53:47
 categories: learn
 tags: mybatis
@@ -28,7 +28,7 @@ tags: mybatis
 	5. 释放资源，关闭数据库连接等。
 	
 	```java
-// 获取数据库连接
+	// 获取数据库连接
 	connection = DriverManager.getConnection(
     properties.getProperty("jdbc.url"),
 	  properties.getProperty("jdbc.username"),
@@ -740,5 +740,4 @@ tags: mybatis
 ### 在 SpringBoot 中使用 PageHelper
 
 *见[项目演示](https://github.com/xianglin2020/mybatis)*
-
 

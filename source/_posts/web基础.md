@@ -1,5 +1,5 @@
 ---
-title: web基础
+title: Web 基础
 excerpt: web 基础知识学习。
 date: 2020-09-06 22:54:22
 categories: learn

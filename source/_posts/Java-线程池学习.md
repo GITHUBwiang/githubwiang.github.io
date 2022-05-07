@@ -1,5 +1,5 @@
 ---
-title: 线程池
+title: Java 线程池学习
 date: 2020-11-29 17:10:44
 categories: learn
 tags: java
@@ -7,7 +7,7 @@ excerpt: 线程池是一种基于池化管理线程的工具，经常出现在�
 banner_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/Executors.png
 ---
 
-# 线程池
+# 线程池学习
 
 ## 线程池概念
 

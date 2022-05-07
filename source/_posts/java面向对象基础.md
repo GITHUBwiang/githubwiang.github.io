@@ -1,5 +1,5 @@
 ---
-title: java面向对象基础
+title: java 面向对象基础
 date: 2020-09-06 22:50:16
 categories: learn
 tags: java

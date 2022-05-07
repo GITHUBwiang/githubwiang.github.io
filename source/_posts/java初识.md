@@ -1,5 +1,5 @@
 ---
-title: java初识
+title: java 初识
 date: 2020-09-06 22:47:54
 categories: learn
 tags: java

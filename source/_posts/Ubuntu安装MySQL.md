@@ -1,5 +1,5 @@
 ---
-title: Ubuntu安装MySQL
+title: Ubuntu 安装 MySQL
 date: 2020-10-10 22:44:19
 categories: daily
 tags: [ubuntu, mysql]

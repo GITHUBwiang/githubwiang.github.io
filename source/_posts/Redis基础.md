@@ -1,5 +1,5 @@
 ---
-title: Redis基础
+title: Redis 基础
 date: 2020-10-03 20:53:49
 categories: learn
 tags: redis

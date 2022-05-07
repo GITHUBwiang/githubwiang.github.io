@@ -1,5 +1,5 @@
 ---
-title: Ubuntu安装
+title: Ubuntu 安装
 date: 2020-10-17 21:01:11
 categories: learn
 tags: ubuntu

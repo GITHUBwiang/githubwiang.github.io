@@ -1,7 +1,8 @@
 ---
-title: java设计模式
+title: java 设计模式
 date: 2020-09-06 22:50:27
-tags:
+tags: [java, 设计模式]
+categories: learn
 ---
 
 # 设计模式

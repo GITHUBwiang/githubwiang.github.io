@@ -349,10 +349,63 @@ https://hub.docker.com/
   apt install vim
   ```
 
-* MySQL
+* [MySQL](https://hub.docker.com/_/mysql)
 
   ```shell
   docker run --name mysql-dev -e MYSQL_ROOT_PASSWORD=12345678 -e MYSQL_DATABASE=dev -e MYSQL_USER=dev -e MYSQL_PASSWORD=password -p 3306:3306 -d mysql:latest
+  ```
+
+* [禅道](https://hub.docker.com/r/idoop/zentao)
+
+  ```shell
+  mkdir -p /data/zbox && \
+  docker run -d -p 80:80 -p 3306:3306 \
+          -e ADMINER_USER="root" -e ADMINER_PASSWD="password" \
+          -e BIND_ADDRESS="false" \
+          -v /data/zbox/:/opt/zbox/ \
+          --name zentao-server \
+          idoop/zentao:latest
+  ```
+  
+* [Jenkins](https://hub.docker.com/r/jenkins/jenkins)
+
+  ```shell
+  mkdir -p /data/jenkins && \
+  docker run -d -p 8080:8080 -p 50000:50000 \ 
+  				-v /data/jenkins:/var/jenkins_home \ 
+  				--restart always \ 
+  				jenkins/jenkins:lts-jdk11
+  ```
+
+* [GitLab](https://hub.docker.com/r/gitlab/gitlab-ce)
+
+  [中文教程](https://docs.gitlab.cn/jh/install/docker.html)
+
+  ```shell
+  docker run --detach \
+    --hostname gitlab.example.com \
+    --publish 443:443 --publish 80:80 --publish 22:22 \
+    --name gitlab \
+    --restart always \
+    --volume /data/gitlab/config:/etc/gitlab \
+    --volume /data/gitlab/logs:/var/log/gitlab \
+    --volume /data/gitlab/data:/var/opt/gitlab \
+    --shm-size 256m \
+    gitlab/gitlab-ee:latest
+  ```
+
+* [MongoDB](https://hub.docker.com/_/mongo)
+
+  参见：[Docker版MongoDB的安装](https://www.jianshu.com/p/2181b2e27021)
+
+  ```bash
+  mkdir -p .docker/data/mongodb && \
+  docker run -d -p 27017:27017 -v ~/.docker/data/mongodb:/data/db -e MONGO_INITDB_ROOT_PASSWORD=mongomongo -e MONGO_INITDB_ROOT_USERNAME=mongo --name mongo mongo 
+  
+  # 进入容器中的 MongoDB 命令行
+  docker exec -it mongo mongo admin
+  # 创建管理员账户
+  db.createUser({ user: 'mongo', pwd: 'mongomongo', roles: [ { role: "root", db: "admin" } ] });
   ```
 
   

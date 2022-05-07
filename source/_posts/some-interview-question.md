@@ -383,5 +383,5 @@ categories: interview
 
 ## 结果
 
-确定去 ByteGreen 所有没有去参加面试。
+确定去 ByteGreen 所以没有去参加面试。
 

@@ -1,5 +1,5 @@
 ---
-title: MySQL数据库知识
+title: MySQL 数据库知识
 date: 2020-12-26 18:58:00
 categories: interview
 tags: MySQL

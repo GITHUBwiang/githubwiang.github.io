@@ -1,5 +1,5 @@
 ---
-title: jdbc基础
+title: jdbc 基础
 excerpt: jdbc 基础知识学习。
 date: 2020-09-06 22:55:29
 categories: learn

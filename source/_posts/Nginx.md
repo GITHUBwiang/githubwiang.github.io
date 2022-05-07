@@ -1,5 +1,5 @@
 ---
-title: Nginx
+title: Nginx 基础知识
 date: 2020-12-03 20:39:51
 categories: learn
 tags: nginx
@@ -133,7 +133,6 @@ Nginx 是一款轻量级的 Web 服务器、反向代理服务器及电子邮件
 [root@localhost ~]# nginx -h
 nginx version: nginx/1.18.0
 Usage: nginx [-?hvVtTq] [-s signal] [-c filename] [-p prefix] [-g directives]
-
 Options:
   -?,-h         : this help
   -v            : show version and exit

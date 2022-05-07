@@ -1,5 +1,5 @@
 ---
-title: RabbitMQ
+title: RabbitMQ 基础
 date: 2020-12-05 13:20:00
 catefories: learn
 tags: mq

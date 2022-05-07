@@ -1,5 +1,5 @@
 ---
-title: JVM基础
+title: JVM 基础
 excerpt: JVM 基础知识和一些面试题。
 date: 2021-01-17 14:55:05
 tags: jvm
