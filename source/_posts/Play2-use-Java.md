@@ -98,7 +98,7 @@ test                     → source folder for unit or functional tests
 
 `app` 目录包含所有可执行文件：Java 和 Scala 的源代码，模板文件和 `assets`；
 
-默认创建三个包对应 MVC 架构的三个组成部分：
+默认创建三个包对应 MVC 的三层架构：
 
 `app/controllers`
 
@@ -106,11 +106,11 @@ test                     → source folder for unit or functional tests
 
 `app/views`
 
-`app` 下可以随意创建包，包路径也是随意的，比如：`app/store/xianglin/controllers` 或者 `app/store/xiangln/services`。
+`app` 下可以随意创建包，包路径也是随意的，比如：`app/store/xianglin/play2/controllers` 或者 `app/store/xiangln/play2/services`。
 
 ### `public/`
 
-`public` 存储资源文件，三个子目录分别用于存储images、CSS 和 JavaScript。
+`public` 存储资源文件，三个子目录分别用于存储 images、CSS 和 JavaScript。
 
 ### `conf/`
 
@@ -118,9 +118,9 @@ test                     → source folder for unit or functional tests
 
 `application.conf`：保存应用大部分的配置项，参见：[Configuration file syntax and features](https://www.playframework.com/documentation/2.8.x/ConfigFile)；
 
-`routes`：保存 Play2 的路由规则，及如何将 `uri` 和 `Action` 对应；
+`routes`：保存 Play2 的路由规则，即如何将 `uri` 和 `Action` 对应；
 
-`logback.xml`：保存 Logback 配置。
+`logback.xml`：保存 Logback 日志框架的配置。
 
 ### `lib/`
 
@@ -210,7 +210,7 @@ Play 处理 `http://localhost:9000/` 请求的主要步骤如下：
 
 ## Play 示例项目
 
-[Play Tutorials](https://www.playframework.com/documentation/2.8.x/Tutorials) 有很多 Play 的实例项目，供学习和使用。
+[Play Tutorials](https://www.playframework.com/documentation/2.8.x/Tutorials) 有很多 Play 的实例项目，供学习使用。
 
 #  Main concepts for Java
 
@@ -228,19 +228,23 @@ import play.mvc.Controller;
 
 import javax.inject.Inject;
 
-public class MyController extends Controller {
+public class ConfigController extends Controller {
     private final Config config;
 
     @Inject
-    public MyController(Config config) {
+    public ConfigController(Config config) {
         this.config = config;
+    }
+    
+    public Result config() {
+        return ok(Json.toJson(config));
     }
 }
 ```
 
 ## 处理 HTTP 请求
 
-### Play 基础概念：`Actions`、`Controllers` 和 `Results`
+### Play 基础概念：`Action`、`Controller` 和 `Result`
 
 #### `Action`
 
@@ -248,13 +252,13 @@ Play 接收的大部分方法都交由 `Action` 处理，`Action` 用于处理�
 
 ```java
 public play.mvc.Result index(play.mvc.Http.Request request) {
-		return play.mvc.Results.ok("Got request " + request + "!");
+    return play.mvc.Results.ok("Got request " + request + "!");
 }
 ```
 
-#### `Controllers`
+#### `Controller`
 
-Play 中 `Controller` 继承自 `play.mvc.Controllr` ，用于定义一组 `Action` ，如下所示：
+Play 中使用的 `Controller` 继承自 `play.mvc.Controllr` ，用于定义一组 `Action` ，如下所示：
 
 ```java
 package controllers;
@@ -274,9 +278,9 @@ public class Application extends Controller {
 }
 ```
 
-#### `Results`
+#### `Result`
 
-HTTP Response 包括：响应行、响应头和返回数据，Play 中 `play.mvc.Result` 定义了 HTTP 响应结构，`play.mvc.Results` 定义了许多静态方法，方便返回 `Result`，如下所示：
+HTTP Response 包括：响应行、响应头和返回数据，Play 中 `play.mvc.Result` 定义了 HTTP 响应结构，`play.mvc.Results` 定义了许多静态方法，方便返回各种 `Result`，如下所示：
 
 ```java
 // 200 OK
@@ -300,9 +304,9 @@ Result temporaryRedirect =  temporaryRedirect("/user/home");
 `router` 的作用是将每个请求映射到一个 `Action` 方法的调用，HTTP 请求包括两个部分：
 
 * 请求路径（例如：`/clients/1234`、`/photos/list`），包括查询字符串；
-* HTTP 请求方法（`GET`、`POST`）。
+* HTTP 请求方法（`GET`、`POST` 等）。
 
-Play2 的映射定义在 `conf/routes` 文件中，Play2 会编译它，因此可以在浏览器中直接看到错误。映射定义为如下格式：
+Play2 的映射定义在 `conf/routes` 文件中，Play2 会编译它，因此可以直接在浏览器中看到错误。映射定义为如下格式：
 
 ```properties
 Protocol    URLPATH  ControllerMapping
@@ -436,4 +440,107 @@ public Result index() {
   return ok("<h1>Hello World!</h1>").as(MimeTypes.HTML).discardingCookie("theme");
 }
 ```
+
+### Session And Flash
+
+保存在 Session 中的数据在整个会话中有效；保存在 Flash 中的数据仅会在下次请求中生效。Play 中 Session 和 Flash 都是通过 Cookies 实现的，所以有几条注意事项：
+
+* 数据的大小不能超过 4K；
+* 只能存储字符串内容；
+* Cookies 中的内容在浏览器中可见，可能会导致敏感信息泄漏。
+
+#### Session 配置
+
+`play.http.session.cookieName`：Cookie 名称，默认为：`PLAY_SESSION`；
+
+`play.http.session.maxAge`：Session 的超时时间，默认没有超时时间，仅在浏览器关闭时无效。
+
+#### 操作 Session
+
+使用如下方式设置、读取和删除 Session：
+
+```java
+public class SessionAndFlashController extends Controller {
+    public Result addSession(Http.Request request) {
+        // 添加 Session
+        return redirect("/session/read").addingToSession(request, "connected", "user@gmail.com");
+    }
+
+    public Result readSession(Http.Request request) {
+        // 读取 Session
+        return request
+                .session()
+                .get("connected")
+                .map(user -> ok("Hello " + user))
+                .orElseGet(() -> unauthorized("Oops, you are not connected"));
+    }
+
+    public Result clearSession() {
+        // 清除 Session
+        return redirect("/session/read").withNewSession();
+    }
+}
+```
+
+#### 操作 Flash
+
+Flash 类似 Session，但仅在下一次请求有效。使用如下方式设置、读取 Flash：
+
+```java
+public Result addFlash() {
+    return redirect("/flash/read").flashing("success", "The item has been created");
+}
+
+public Result readFlash(Http.Request request) {
+    return ok(request.flash().get("success").orElse("Welcome!"));
+}
+```
+
+### 请求体解析器
+
+#### 什么是请求体解析器
+
+HTTP 请求的格式是：请求行、请求头和请求体。通常来说请求头很小，能够安全的缓存在内存中，Play 使用 `play.mvc.Http.RequestHeader` 表示请求头。请求体可能很大，因此不能直接缓存在内存中，一般称之为流。事实上很多请求体比较小而且能映射为某种模型缓存在内存中，Play 使用 `play.mvc.BodyParser` 来完成请求体从流到模型的映射。Play 是一个异步框架，因此不能使用传统的 `java.io.InputStream` 来读取请求体，Play 使用 [Akka Stream](https://doc.akka.io/docs/akka/2.6/stream/index.html?language=java&_ga=2.144468661.1268954494.1652018498-216591448.1652018498) 完成这一操作。
+
+#### 使用自带的请求体解析器
+
+没有明确指定时 Play 根据 `Content-Type` 来选择合适的请求体解析器，如下面表格所示：
+
+| Content-Type                                         | Type                                                         | Method                  |
+| ---------------------------------------------------- | ------------------------------------------------------------ | ----------------------- |
+| `text/plain`                                         | `String`                                                     | `asText()`              |
+| `application/json`                                   | `com.fasterxml.jackson.databind.JsonNode`                    | `asJson()`              |
+| `application/xml`、`text/xml`、`application/XXX+xml` | `org.w3c.Document`                                           | `asXml()`               |
+| `application/x-www-form-urlencoded`                  | `Map<String, String[]>`                                      | `asFormUrlEncoded()`    |
+| `multipart/form-data`                                | `play.mvc.Http.MultipartFormData`、`play.mvc.Http.MultipartFormData.FilePart` | `asMultipartFormData()` |
+| other                                                | `play.mvc.Http.RawBuffer`                                    | `asRaw()`               |
+
+使用方法如下：
+
+```java
+public class BodyParserController extends Controller {
+    public Result json(Http.Request request) {
+        JsonNode jsonNode = request.body().asJson();
+        return ok("Got name: " + jsonNode.get("name").asText());
+    }
+}
+```
+
+#### 明确指定请求体解析器
+
+使用 `@play.mvc.BodyParser.Of` 注解明确指定当前请求的请求体解析器，Play 自带的解析器作为 `play.mvc.BodyParser` 的内部类提供，如下所示：
+
+```java
+@play.mvc.BodyParser.Of(BodyParser.Json.class)
+public Result json(Http.Request request) {
+    JsonNode jsonNode = request.body().asJson();
+    return ok("Got name: " + jsonNode.get("name").asText());
+}
+```
+
+#### 请求体长度限制
+
+`play.http.parser.maxMemoryBuffer`：内存缓存限制，默认100KB；
+
+`play.http.parser.maxDiskBuffer`：磁盘缓存限制，默认10MB。
 

@@ -36,8 +36,6 @@ public static void main(String[] args) {
     }
 ```
 
-
-
 # 函数式编程
 
 * 基于函数式接口并使用 Lambda 表达式的编程方式

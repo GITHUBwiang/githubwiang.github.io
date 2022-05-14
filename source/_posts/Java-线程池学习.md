@@ -4,7 +4,7 @@ date: 2020-11-29 17:10:44
 categories: learn
 tags: java
 excerpt: 线程池是一种基于池化管理线程的工具，经常出现在多线程服务器中。既避免处理任务时创建销毁线程的开销，也避免了线程数据膨胀导致过分调度的问题。
-banner_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/Executors.png
+banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202102/Executors.png
 ---
 
 # 线程池学习
@@ -73,7 +73,7 @@ private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 
 其生命周期转换关系如下：
 
-![线程池生命周期转换](https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%BD%AC%E6%8D%A2.png)
+![线程池生命周期转换](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202102/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%BD%AC%E6%8D%A2.png)
 
 ### 任务执行机制
 
@@ -87,7 +87,7 @@ private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 
 其执行流程如图所示：
 
-![线程执行流程图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/%E7%BA%BF%E7%A8%8B%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
+![线程执行流程图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202102/%E7%BA%BF%E7%A8%8B%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
 
 任务拒绝模块是线程池的保护部分，线程池有一个最大的容量，当线程池的任务缓存队列已满，并且线程池中的线程数达到 `maximumPoolSize` 时，就需要拒绝掉该任务，采取任务拒绝策略，保护线程池。
 
@@ -177,7 +177,7 @@ Worker 通过继承 AQS，使用 AQS 来实现独占锁这个功能。
 
 增加线程是通过 `addWorker` 方法完成的。`addWorker` 方法有两个参数：`firstTask`、`core` 。`firstTask` 参数用于指定新增的线程执行的第一个任务，该参数可以为空；`core` 参数为 `true` 时表示新增线程时会判断当前活动的线程数是否少于 `corePoolSize` ，`false` 表示新增线程前需要判断当前活动线程数是否少于 `maximumPoolSize` ，其增加流程如下：
 
-![线程池增加Worker步骤](https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%A2%9E%E5%8A%A0Worker%E6%AD%A5%E9%AA%A4.png)
+![线程池增加Worker步骤](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202102/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%A2%9E%E5%8A%A0Worker%E6%AD%A5%E9%AA%A4.png)
 
 Worker 类中的 `run()` 方法调用了 `runWorker()` 方法来执行任务，其执行过程如下：
 
@@ -186,7 +186,7 @@ Worker 类中的 `run()` 方法调用了 `runWorker()` 方法来执行任务，�
 3. 执行任务。
 4. 获取不到任务时，执行 `processWorkerExit()` 方法主动销毁线程。
 
-![runWorker步骤](https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/runWorker%E6%AD%A5%E9%AA%A4.png)
+![runWorker步骤](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202102/runWorker%E6%AD%A5%E9%AA%A4.png)
 
 线程池中线程的销毁依赖 JVM 自动的回收，线程池做的工作就是根据当前线程池状维护一定数量的线程引用，防止这部分线程被 JVM 回收，当线程池决定哪些线程需要回收时，只需要将其引用消除即可。Worker 被创建出来后，就会不断循环获取任务执行，核心线程可以无限等待获取任务，非核心线程要限时获取任务。当 Worker 无法获取到任务时，循环会结束，Worker 会主动消除自身在线程池内的引用。
 

@@ -176,8 +176,6 @@ public class AccountServiceImplTest {
 }
 ```
 
-
-
 ### 编程式的事务管理
 
 配置事务管理器
@@ -208,8 +206,6 @@ public class AccountServiceImpl implements AccountService {
 
 ```
 
-
-
 ```xml
 <bean id="accountService" class="person.xiangln.transaction.service.AccountServiceImpl">
   <property name="accountDao" ref="accountDao"/>
@@ -228,8 +224,6 @@ public void transfer(String from, String to, BigDecimal money) {
   });
 }
 ```
-
-
 
 ### 声明式事务管理
 

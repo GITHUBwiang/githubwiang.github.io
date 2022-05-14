@@ -54,8 +54,6 @@ banner_img: https://maven.apache.org/images/maven-logo-black-on-white.png
 
 ## Maven 的打包方式
 
-
-
 ## Maven 常用命令
 
 | 命令                     | 用途                |
@@ -76,12 +74,6 @@ banner_img: https://maven.apache.org/images/maven-logo-black-on-white.png
 2. 输入项目信息
 
    ![image-20200913113629033](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/113629.png)
-
-3. 查看项目结构
-
-   <img src="/Users/xianglin/Library/Application Support/typora-user-images/image-20200913113712350.png" alt="image-20200913113712350" style="zoom: 50%;" />
-
-
 
 ### `compile`
 
@@ -244,7 +236,6 @@ Maven 项目的核心是`pom.xml`,`POM(Project Object Model)`项目对象模型�
      </build>
    </project>
    ```
-   
    
 
 * 第一行指定了 XML 文件的版本和编码方式
@@ -426,8 +417,6 @@ Maven 项目的核心是`pom.xml`,`POM(Project Object Model)`项目对象模型�
    ```shell
    mvn archetype:generate
    ```
-
-
 
 ## 坐标和依赖
 

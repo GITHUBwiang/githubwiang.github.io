@@ -20,63 +20,63 @@ excerpt: 把自己的台式机从 Hackintosh 转到 Manjaro，记录安装步骤
 
 在 Virtual Box 管理界面点击「新建」，填写虚拟机的基本信息，其中「版本」选择「Arch Linux（64-bit）」：
 
-![Snipaste_2022-04-27_20-57-53](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/211559.png)
+![Snipaste_2022-04-27_20-57-53](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/211559.png)
 
-![Snipaste_2022-04-27_20-58-00](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/211630.png)
+![Snipaste_2022-04-27_20-58-00](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/211630.png)
 
 创建完成后，选中创建的虚拟机，右键点击「设置」进入设置页面，在「系统」栏调整「处理器数量」，在「显示」栏调整「显存大小」：
 
-![image-20220507211848679](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/211848.png)
+![image-20220507211848679](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/211848.png)
 
-![Snipaste_2022-04-27_20-58-29](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/212004.png)
+![Snipaste_2022-04-27_20-58-29](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/212004.png)
 
-![Snipaste_2022-04-27_20-58-36](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/212018.png)
+![Snipaste_2022-04-27_20-58-36](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/212018.png)
 
 设置完成后，双击启动虚拟机，首次启动时，会提示选择虚拟光盘（即 Manjaro 的镜像文件），按提示选择已下载好的 Manjaro 镜像文件（忘记截图了，以 Ubuntu 的镜像为例），即可进入安装界面：
 
-![Snipaste_2022-04-27_20-47-56](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/212230.png)
+![Snipaste_2022-04-27_20-47-56](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/212230.png)
 
-![Snipaste_2022-04-27_20-48-07](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/212447.png)
+![Snipaste_2022-04-27_20-48-07](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/212447.png)
 
-![Snipaste_2022-04-27_20-48-35](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/212459.png)
+![Snipaste_2022-04-27_20-48-35](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/212459.png)
 
 ### 安装 Manjaro
 
 可以在 Manjaro 的引导界面调整一些参数，比如时区、语言、键盘布局等，这里选择「Boot with open source drivers」进入 Manjaro 的 LiveCD 界面：
 
-![Snipaste_2022-04-27_20-59-52](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213023.png)
+![Snipaste_2022-04-27_20-59-52](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213023.png)
 
 点击「Luanch installer」进入安装界面：
 
-![Snipaste_2022-04-27_21-00-33](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213047.png)
+![Snipaste_2022-04-27_21-00-33](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213047.png)
 
 根据「Manjaro Linux 安装程序」的引导步骤完成对应到设置即可顺利安装：
 
-![Snipaste_2022-04-27_21-00-48](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213316.png)
+![Snipaste_2022-04-27_21-00-48](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213316.png)
 
-![Snipaste_2022-04-27_21-00-57](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213324.png)
+![Snipaste_2022-04-27_21-00-57](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213324.png)
 
-![Snipaste_2022-04-27_21-01-03](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213337.png)
+![Snipaste_2022-04-27_21-01-03](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213337.png)
 
 在「分区」这里，如果没有特殊需求，可以不做调整，如果想要「手动分区」或者设置「交换分区」，推荐阅读 Arch Linux 的安装教程：[建立硬盘分区](https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%BB%BA%E7%AB%8B%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA)。
 
-![Snipaste_2022-04-27_21-01-10](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213349.png)
+![Snipaste_2022-04-27_21-01-10](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213349.png)
 
 在「用户」栏推荐选中「为管理员帐号使用同样的密码」：
 
-![Snipaste_2022-04-27_21-01-26](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213822.png)
+![Snipaste_2022-04-27_21-01-26](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213822.png)
 
 在「摘要」栏会展示即将安装的概要信息，确认后点击「安装」即可：
 
-![Snipaste_2022-04-27_21-01-32](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213838.png)
+![Snipaste_2022-04-27_21-01-32](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213838.png)
 
-![Snipaste_2022-04-27_21-01-37](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213853.png)
+![Snipaste_2022-04-27_21-01-37](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213853.png)
 
-![Snipaste_2022-04-27_21-01-42](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213908.png)
+![Snipaste_2022-04-27_21-01-42](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213908.png)
 
 安装结束后即可重启虚拟机，进入新装的 Manjaro 系统中：
 
-![Snipaste_2022-04-27_21-19-08](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/213921.png)
+![Snipaste_2022-04-27_21-19-08](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/213921.png)
 
 ## 基础配置
 
@@ -90,7 +90,7 @@ excerpt: 把自己的台式机从 Hackintosh 转到 Manjaro，记录安装步骤
 sudo pacman-mirrors -i -c China -m rank
 ```
 
-![2022-04-29 21-52-29屏幕截图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/221356.png)勾选最接近的镜像站，然后按两次 `OK` ，最后使用如下命令刷新缓存：
+![2022-04-29 21-52-29屏幕截图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/221356.png)勾选最接近的镜像站，然后按两次 `OK` ，最后使用如下命令刷新缓存：
 
 `sudo pacman -Syy`
 
@@ -131,11 +131,11 @@ sudo pacman -S --needed git base-devel yay
   LC_ALL=C xdg-user-dirs-update --force
   ```
 
-  ![2022-04-30 16-06-51屏幕截图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/161227.png)
+  ![2022-04-30 16-06-51屏幕截图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/161227.png)
 
 * 重新登录系统，选择“保留旧的名称”
 
-  ![2022-04-30 16-08-05屏幕截图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/161322.png)
+  ![2022-04-30 16-08-05屏幕截图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/161322.png)
 
 ### 安装中文输入法
 
@@ -149,7 +149,7 @@ sudo pacman -S ibus-rime
 
 随后打开设置界面，通过“键盘”中的“输入源”添加：
 
-![2022-04-29 21-46-43屏幕截图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/222234.png)
+![2022-04-29 21-46-43屏幕截图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/222234.png)
 
 ### 安装 Microsoft Edge
 
@@ -159,7 +159,7 @@ sudo pacman -S ibus-rime
 yay microsoft-edge
 ```
 
-![2022-04-29 22-27-05屏幕截图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/223139.png)
+![2022-04-29 22-27-05屏幕截图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/223139.png)
 
 ### 使用 OneDrive
 
@@ -174,11 +174,11 @@ pacman -Ss onedrive-abraunegg
 sudo pacman -S onedrive-abraunegg
 ```
 
-![image-20220430154629576](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/154629.png)
+![image-20220430154629576](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/154629.png)
 
 #### 配置 OneDrive
 
-![image-20220430155147440](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/155147.png)
+![image-20220430155147440](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/155147.png)
 
 #### 同步文件
 
@@ -224,7 +224,7 @@ external-controller: 127.0.0.1:9090
 
 随后打开 http://clash.razord.top/#/settings 进入配置页面：
 
-![image-20220501202533766](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/202533.png)
+![image-20220501202533766](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/202533.png)
 
 #### 开机自启动
 
@@ -242,9 +242,9 @@ Hidden=false
 
 然后在「优化」—「开机启动程序」中选择 clash，实际上是在 `~/.config/autostart` 中创建了相同的文件：
 
-![image-20220501204218419](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/204218.png)
+![image-20220501204218419](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/204218.png)
 
-![image-20220501204406181](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/204406.png)
+![image-20220501204406181](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/204406.png)
 
 ## 开发工具安装及配置
 
@@ -296,9 +296,9 @@ username = "xianglin2020"
 
 最后在 Typora 中配置使用 upgit ，「上传服务」选择「Custom Command」，命令填写 upgit 执行路径，点击「验证图片上传选项」，如下图所示：
 
-![2022-04-29 22-42-29屏幕截图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/224343.png)
+![2022-04-29 22-42-29屏幕截图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/224343.png)
 
-![2022-04-29 22-42-43屏幕截图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/224349.png)
+![2022-04-29 22-42-43屏幕截图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/224349.png)
 
 #### 生成 Lisence
 
@@ -306,16 +306,40 @@ username = "xianglin2020"
 
 ### Open JDK
 
+参见：[Java (简体中文)](https://wiki.archlinux.org/title/Java_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))。
+
 使用 `pacman` 查找和安装 Open JDK，如下所示：
 
 ```bash
 # 查找 JDK
-pacman -Ss openjdk
-# 安装 JDK
+pacman -Ss openjdk | grep jdk
+# 安装 JDK 17
 sudo pacman -S jdk-openjdk
+# 安装 JDK 11
+sudo pacman -S jdk11-openjdk
 ```
 
-![image-20220430143914269](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/143914.png)
+![image-20220430143914269](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/143914.png)
+
+使用 `archlinux-java` 命令管理已安装的 JDK：
+
+![image-20220508114205717](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/114205.png)
+
+查看已安装的 JDK：
+
+```bash
+archlinux-java status
+```
+
+![image-20220508114316372](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/114316.png)
+
+修改默认 JDK：
+
+```bash
+sudo archlinux-java set java-11-openjdk
+```
+
+![image-20220508114421770](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/114421.png)
 
 ### Intellij IDEA
 
@@ -325,7 +349,9 @@ sudo pacman -S jdk-openjdk
 pacman -Ss intellij
 ```
 
-![image-20220430144137003](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/144137.png)
+![image-20220430144137003](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/144137.png)
+
+IDEA 中文输入法候选框不跟随光标的解决办法参见：[JetBrainsRuntime-for-Linux-x64](https://github.com/RikudouPatrickstar/JetBrainsRuntime-for-Linux-x64)。
 
 ### Maven
 
@@ -341,7 +367,7 @@ sudo pacman -S maven
 ls -l `which mvn`
 ```
 
-![image-20220501184151501](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/184151.png)
+![image-20220501184151501](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/184151.png)
 
 复制一份 `settings.xml` 到 `~/.m2` 目录下，并修改使用阿里云的 Maven 仓库：
 
@@ -376,7 +402,7 @@ sudo pacman -S sbt
 yay sublime
 ```
 
-![image-20220430144414159](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/144414.png)
+![image-20220430144414159](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/144414.png)
 
 #### 激活码
 
@@ -414,15 +440,15 @@ B1D4C178 2F9DDB16 ABAA74E5 95304BEF
 
 点击 `Preferences` — `Package Control` 选择 `Install Package`；
 
-![image-20220430145202846](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/145202.png)
+![image-20220430145202846](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/145202.png)
 
 输入 `ChineseLocalzations` 安装中文语言包：
 
-![image-20220430145443835](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/145443.png)
+![image-20220430145443835](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/145443.png)
 
 输入 `PrettyJSON` 安装 `JSON` 格式化工具，使用 `Ctrl` + `Shift` + `P` 打开命令面板，输入并选择 `Format JSON` 即可格式化 `JSON`：
 
-![image-20220430150037393](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/150037.png)
+![image-20220430150037393](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/150037.png)
 
 ### Node.js
 
@@ -451,7 +477,7 @@ npm install -g cnpm --registry=https://registry.npmmirror.com
   echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.zshrc
   ```
 
-  ![image-20220430153304384](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/153304.png)
+  ![image-20220430153304384](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/153304.png)
 
 * 使用 `nvm` 安装 `node` 
 
@@ -459,11 +485,11 @@ npm install -g cnpm --registry=https://registry.npmmirror.com
   nvm install node
   ```
 
-  ![image-20220430153514915](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/153514.png)
+  ![image-20220430153514915](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/153514.png)
 
 * 重新使用 `npm install` 
 
-  ![image-20220430153712711](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/153712.png)
+  ![image-20220430153712711](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/153712.png)
 
 ### 使用 Hexo
 
@@ -474,7 +500,7 @@ npm install -g hexo-cli
 npx hexo server
 ```
 
-![image-20220430162721008](https://raw.githubusercontent.com/xianglin2020/gallery/master/202204/162721.png)
+![image-20220430162721008](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202204/162721.png)
 
 ### 使用 Docker
 
@@ -572,5 +598,17 @@ yay wps-office-cn
 yay wps-office-mui-zh-cn
 yay ttf-wps-fonts
 yay ttf-ms-fonts
+```
+
+### Aria2
+
+```bash
+sudo pacman -S aria2 
+```
+
+### Postman
+
+```bash
+sudo pacman -S postman-bin
 ```
 

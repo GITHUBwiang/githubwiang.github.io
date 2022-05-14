@@ -124,8 +124,6 @@ public static void main(String[] args) throws Exception {
      </dependency>
      ```
 
-     
-
   2. 创建配置文件：`db.properties`
 
      ```properties
@@ -136,7 +134,7 @@ public static void main(String[] args) throws Exception {
      initialSize=10
      maxActive=20
      ```
-
+  
   3. 使用数据库连接池
 
      ```java
@@ -149,8 +147,7 @@ public static void main(String[] args) throws Exception {
      // 3. 创建数据库连接
      Connection connection = dataSource.getConnection();
      ```
-
-     
+  
 
 ### C3P0
 
@@ -168,8 +165,6 @@ public static void main(String[] args) throws Exception {
      </dependency>
      ```
 
-     
-
   2. `c3p0-config.xml`
 
      ```xml
@@ -185,7 +180,7 @@ public static void main(String[] args) throws Exception {
          </default-config>
      </c3p0-config>
      ```
-
+  
   3. 使用数据库连接池
 
      ```java
@@ -215,8 +210,6 @@ public static void main(String[] args) throws Exception {
     <version>1.7</version>
   </dependency>
   ```
-
-
 
 ## Statement 和 PreparedStatement
 

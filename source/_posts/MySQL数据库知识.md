@@ -3,10 +3,10 @@ title: MySQL 数据库知识
 date: 2020-12-26 18:58:00
 categories: interview
 tags: MySQL
-banner_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93.png
+banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202101/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93.png
 ---
 
-![关系型数据库](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93.png)
+![关系型数据库](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202101/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93.png)
 
 ## 数据库模块划分
 
@@ -55,7 +55,7 @@ InnoDB 存储引擎的必须仅有一个密集索引，其选取规则如下：
 
 非主键索引存储相关键位和其对应的主键值，包含两次查找。
 
-![image-20201227155720085](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227155720085.png)
+![image-20201227155720085](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227155720085.png)
 
 如图：表 `test.innodb` 使用 InnoDB 存储引擎，其数据和索引存储在文件 `innodb.ibd` 中；表 `test.myisam` 使用 MyISAM 存储引擎，其数据文件保存在 `myisam.MYD` 中，索引文件保存在 `myisam.MYI` 中。
 
@@ -69,7 +69,7 @@ InnoDB 存储引擎的必须仅有一个密集索引，其选取规则如下：
 
 使用 `show variables like '%query%';` 查询当前数据库对慢查询的配置，主要有以下几个参数：
 
-![image-20201227160625055](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227160625055.png)
+![image-20201227160625055](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227160625055.png)
 
 | `Variable_name`       | `Value`                     | 描述                     |
 | --------------------- | --------------------------- | ------------------------ |
@@ -86,11 +86,11 @@ set global long_query_time = 1;
 set global slow_query_log = on;
 ```
 
-![image-20201227163312968](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227163312968.png)
+![image-20201227163312968](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227163312968.png)
 
 可以使用 `show status like '%slow_queries%'` 来查询当前会话的慢 SQL 数：
 
-![image-20201227162732599](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227162732599.png)
+![image-20201227162732599](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227162732599.png)
 
 在慢查询日志 `/var/lib/mysql/manjaro-slow.log `中查看慢 SQL 。
 
@@ -102,7 +102,7 @@ set global slow_query_log = on;
 explain select name from person_info_large order by name desc;
 ```
 
-![image-20201227164335683](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227164335683.png)
+![image-20201227164335683](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227164335683.png)
 
 主要需要关注的字段有：
 
@@ -164,11 +164,11 @@ WHERE
 
 前两个查询的分析结果为：
 
-![image-20201227171132275](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227171132275.png)
+![image-20201227171132275](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227171132275.png)
 
 最后一个查询的分析结果为：
 
-![image-20201227171109740](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227171109740.png)
+![image-20201227171109740](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227171109740.png)
 
 最左前缀匹配原则是指：
 
@@ -177,7 +177,7 @@ WHERE
 
 最左匹配原则的成因：如图，创建联合索引时，数据库依据联合索引最左的字段来构建 B+Tree，即会按索引字段顺序对数据排序。比如 a 的值是有序的： 1,1,2,2,3,3 ，B 的值是无序的。当 a 值相等时，b 的值是有序的。所以最左匹配原则遇上范围查询就会停止，因为在一个范围中，剩下的字段不是有序的，剩下的字段都无法使用索引。
 
-![image-20201227172424787](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227172424787.png)
+![image-20201227172424787](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227172424787.png)
 
 ### 索引是建立得越多越好吗
 
@@ -197,7 +197,7 @@ WHERE
 show engines;
 ```
 
-![image-20201227180549669](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227180549669.png)
+![image-20201227180549669](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227180549669.png)
 
 查看默认的存储引擎
 
@@ -205,7 +205,7 @@ show engines;
 show variables like '%storage_engine%';
 ```
 
-![image-20201227180806196](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227180806196.png)
+![image-20201227180806196](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227180806196.png)
 
 查看表相关内容
 
@@ -213,7 +213,7 @@ show variables like '%storage_engine%';
 show table status like 'shop_info_small';
 ```
 
-![image-20201227181032409](https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201227181032409.png)
+![image-20201227181032409](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201227181032409.png)
 
 MyISAM 和 InnoDB 的区别
 

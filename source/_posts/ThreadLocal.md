@@ -45,7 +45,7 @@ tags: java
 
 ThreadLocal 在 Java 中使用哈希表实现。
 
-![2021-01-30 11-14-57屏幕截图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/2021-01-30%2011-14-57%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+![2021-01-30 11-14-57屏幕截图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202102/2021-01-30%2011-14-57%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
 
 ### ThreadLocal 使用的注意点
 

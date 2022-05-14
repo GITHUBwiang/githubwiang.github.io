@@ -72,8 +72,6 @@ MyBatis 内置日志工厂会基于运行时检测信息选择日志委托实现
   }
   ```
 
-  
-
 * `NoLoggingImpl`中的所有方法都未实现，即为禁用日志功能。
 
   ```java
@@ -224,8 +222,6 @@ MyBatis 内置日志工厂会基于运行时检测信息选择日志委托实现
   	</choose>
 </select>
 ```
-
-
 
 ### `trim、where、set`
 
@@ -464,9 +460,7 @@ MyBatis 的一级缓存存在于 `SqlSession` 的生命周期中，在同一个`
   
 * `flushCache`
 
-  配置`flushCache`后`MappedStatement`对象中`flushCacheRequired`属性值由`false`变为`true`![image-20200920142204412](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/142228.png)
-
-  ![image-20200920142607062](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/142950.png)
+  配置`flushCache`后`MappedStatement`对象中`flushCacheRequired`属性值由`false`变为`true`![image-20200920142204412](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/142228.png)![image-20200920142607062](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/142950.png)
 
   对应代码段在`org.apache.ibatis.executor.BaseExecutor#query`中
 

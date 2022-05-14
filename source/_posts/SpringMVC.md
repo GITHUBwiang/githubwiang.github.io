@@ -67,8 +67,6 @@ tags: spring mvc
 
 4. 开发业务代码
 
-
-
 ## SpringMVC 基础及数据绑定
 
 ### URL 绑定
@@ -129,8 +127,6 @@ tags: spring mvc
                  redirectPort="8443" URIEncoding="UTF-8"/>
   ```
 
-  
-
 * Post 请求：`web.xml`中配置`CharacterEncodingFilter`
 
   ```xml
@@ -147,10 +143,6 @@ tags: spring mvc
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   ```
-
-  
-
-  
 
 * Response 响应：Spring 配置`StringHttpMessageConverter`
 
@@ -206,8 +198,6 @@ tags: spring mvc
      </bean>
      ```
 
-     
-
   3. 配置`FreeMarkerConfig`
 
      ```xml
@@ -221,8 +211,7 @@ tags: spring mvc
        </property>
      </bean>
      ```
-
-     
+  
 
 ## Restful风格的应用
 
@@ -285,8 +274,6 @@ tags: spring mvc
   | allowCredentials |                            |`Access-Control-Allow-Credentials`|
   | maxAge           | 预检响应缓存持续时间       |`Access-Control-Max-Age`|
 
-  
-
 * `<mvc:cros>` 全局跨域设置
 
   ```xml
@@ -326,7 +313,6 @@ tags: spring mvc
    </mvc:interceptors>
    ```
 
-   
 
 ### HandlerInterceptor 接口
 
@@ -349,13 +335,9 @@ tags: spring mvc
 
   ![image-20201007184030414](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/184032.png)
 
-
-
 ### Spring MVC 处理流程
 
 ![image-20201007191121154](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/191124.png)
-
-
 
 ## SSM 整合过程
 
@@ -568,8 +550,6 @@ tags: spring mvc
    </dependencies>
    ```
 
-   
-
 2. 在`applicationContext.xml`中配置数据源与连接池
 
    ```xml
@@ -628,8 +608,6 @@ tags: spring mvc
   </configuration>
   ```
 
-  
-
 * 声明式事务配置
 
   在`applicationContext.xml`配置
@@ -640,8 +618,6 @@ tags: spring mvc
   </bean>
   <tx:annotation-driven/>
   ```
-
-  
 
 * 整合 JUnit 单元测试
 
@@ -737,8 +713,6 @@ tags: spring mvc
        void insertSample();
    }
    ```
-
-   
 
 3. 注入 Mapper对象，通过内置 API 完成 CURD 操作
 

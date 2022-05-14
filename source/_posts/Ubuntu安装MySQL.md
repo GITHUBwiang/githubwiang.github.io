@@ -8,66 +8,12 @@ banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/21264
 
 # Ubuntu 安装 MySQL
 
-## Ubuntu 安装
-
-### Ubuntu下载
-
-* 推荐使用[USTC](https://mirrors.ustc.edu.cn/)下载镜像。
-
-## Ubuntu 基础配置
-
-* 更换软件源
-
-  使用 USTC 的 Ubuntu 源，配置方式见[官网](https://mirrors.ustc.edu.cn/help/ubuntu.html)
-
-  简单的配置方式如下：
-
-  ```shell
-  sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
-  
-  # 更新软件索引
-  sudo apt update
-  # 更新软件包
-  sudo apt upgrade
-  ```
-
-* 删除一些不需要的预装软件
-
-  ```shell
-  sudo apt autoremove 
-  ```
-
-* 安装 HomeBrew
-
-  ```shell
-  # 先安装 curl 和 git
-  sudo apt install curl git -y
-  # 安装 HomeBrew
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  ```
-
-  *如果提示网络问题，可以将`install.sh`文件复制到本地后运行`bash install.sh`*
-
-## Ubuntu 基础软件
-
-* 安装搜狗输入法
-
-  下载Ubuntu搜狗输入法：https://pinyin.sogou.com/linux/?r=pinyin
-
-  ```shell
-  sudo dpkg -i sogoupinyin_2.3.2.07_amd64-831.deb
-  
-  # 提示缺少依赖时，使用如下命令
-  sudo apt install -f
-  ```
-
-
 ## Ubuntu Server 和 MySQL
 
 * [Ubuntu Server](https://ubuntu.com/download/alternative-downloads)
 * [MySQL Server](https://downloads.mysql.com/archives/community/)
 
-## 使用 APT 安装 MySQL
+### 使用 APT 安装 MySQL
 
 1. 使用命令安装 MySQL Server
 
@@ -106,7 +52,7 @@ banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/21264
 
    <img src="https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/230111.png" alt="image-20201010230111324" style="zoom:50%;" /><img src="https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/230138.png" alt="image-20201010230138405" style="zoom:50%;" />
 
-3. 在 Ubuntu 中安装 MySQL 并没有提示设置 root 密码，但可以在`/etc/mysql`路径下找到相关配置文件
+3. 在 Ubuntu 中安装 MySQL 并没有提示设置 root 密码，但可以在 `/etc/mysql` 路径下找到相关配置文件
 
    ```shell
    cd /etc/mysql
@@ -117,7 +63,7 @@ banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/21264
 
    ![image-20201010225727578](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/225728.png)
 
-   可以使用`debain.cnf`中的 `user`和`password`登录 MySQL
+   可以使用`debain.cnf`中的 `user` 和 `password` 登录 MySQL
 
    ![image-20201010225905777](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/000743.png)
    
@@ -135,7 +81,7 @@ banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/21264
 
    ![image-20201010231312744](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/231313.png)
 
-5. 找到`/etc/mysql/mysql.conf.d/mysqld.cnf`并注释`bind-address=127.0.01`，后重启 MySQL 服务
+5. 找到 `/etc/mysql/mysql.conf.d/mysqld.cnf` 并注释 `bind-address=127.0.01`，后重启 MySQL 服务
 
 6. 在阿里云的实例列表中找到如下菜单
 
@@ -145,7 +91,7 @@ banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202009/21264
 
    ![image-20201011001500697](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/001501.png)
 
-7. 使用 MySQL 客户端工具datagrid连接MySQL
+7. 使用 MySQL 客户端工具 datagrid 连接 MySQL
 
    ![image-20201011001532104](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/000652.png)
 

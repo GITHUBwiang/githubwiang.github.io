@@ -80,9 +80,9 @@ categories: learn
 
 1. 下载 `linux.x64_11gR2_database_1of2.zip`、`linux.x64_11gR2_database_2of2.zip`两个文件，将其解压。
 
-   ![image-20210406103137806](https://raw.githubusercontent.com/xianglin2020/gallery/master/20210406103144.png)
+   ![image-20210406103137806](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/20210406103144.png)
 
-   ![image-20210406103230234](https://raw.githubusercontent.com/xianglin2020/gallery/master/20210406103230.png)
+   ![image-20210406103230234](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/20210406103230.png)
 
 2. 拉取 Oracle-11g 的 docker 镜像
 
@@ -98,7 +98,7 @@ categories: learn
 
    安装过程较长，查看输出，有 `100% complete` 时，表示安装成功。
 
-   ![image-20210406103420985](https://raw.githubusercontent.com/xianglin2020/gallery/master/20210406103421.png)
+   ![image-20210406103420985](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/20210406103421.png)
 
 ### 解除账户限制
 
@@ -149,5 +149,5 @@ categories: learn
 
 4. 使用可视化工具登录
 
-   ![image-20210406104925250](https://raw.githubusercontent.com/xianglin2020/gallery/master/20210406104925.png)
+   ![image-20210406104925250](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/20210406104925.png)
 

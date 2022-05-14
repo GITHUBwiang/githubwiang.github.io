@@ -52,8 +52,6 @@ tags: spring
    </bean>
    ```
 
-   
-
 2. 基于静态工厂实例化对象
 
    ```java
@@ -67,8 +65,6 @@ tags: spring
    ```xml
    <bean id="apple4" class="org.example.factory.AppleStaticFactory" factory-method="createSweetApple"/>
    ```
-
-   
 
 3. 基于工厂实例方法实例化对象
 
@@ -290,8 +286,6 @@ public class UserServiceTest {
 }
 ```
 
-
-
 ## Spring AOP
 
 ### AOP 关键概念
@@ -314,8 +308,6 @@ public class UserServiceTest {
    </dependency>
    ```
 
-   
-
 2. 编写切面类和切面方法
 
 3. 配置Aspect Bean
@@ -323,8 +315,6 @@ public class UserServiceTest {
    ```xml
    <bean id="methodChecker" class="org.example.aspect.MethodChecker"/>
    ```
-
-   
 
 4. 定义 pointcut
 
@@ -339,7 +329,6 @@ public class UserServiceTest {
    </aop:config>
    ```
 
-   
 
 ### JoinPoint核心方法
 
@@ -405,8 +394,6 @@ Signature getSignature();
    </dependency>
    ```
 
-   
-
 2. 在`applicationContext.xml`中配置数据源
 
    ```xml
@@ -426,8 +413,6 @@ Signature getSignature();
      <property name="jdbcTemplate" ref="jdbcTemplate"/>
    </bean>
    ```
-
-   
 
 3. 在 dao 对象中注入`JdbcTemplate`依赖
 

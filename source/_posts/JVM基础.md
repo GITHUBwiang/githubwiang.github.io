@@ -4,7 +4,7 @@ excerpt: JVM 基础知识和一些面试题。
 date: 2021-01-17 14:55:05
 tags: jvm
 categories: interview
-banner_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202102/JVM.png
+banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202102/JVM.png
 ---
 
 # JVM 基础
@@ -38,7 +38,7 @@ Java 平台无关性是建立在 Java 虚拟机的平台有关性基础之上的
 
 ## JVM 架构
 
-![image-20210117152159865](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/image-20210117152159865.png)
+![image-20210117152159865](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202101/image-20210117152159865.png)
 
 ### ClassLoader
 
@@ -62,7 +62,7 @@ Java 平台无关性是建立在 Java 虚拟机的平台有关性基础之上的
 
 ### 双亲委派机制
 
-![双亲委派机制](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/image-20210117192054967.png)
+![双亲委派机制](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202101/image-20210117192054967.png)
 
 类加载过程：
 

@@ -11,7 +11,7 @@ banner_img: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Docker_%28
 
 ## Docker 基础概念
 
-* Docker 是一个用来装程序及其环境的容器，属于Linux 容器的一种封装，提供简单易用的容器使用接口。它是目前最流行的 Linux 容器解决方案。
+Docker 是一个用来装程序及其环境的容器，属于Linux 容器的一种封装，提供简单易用的容器使用接口。它是目前最流行的 Linux 容器解决方案。
 
 ### Docker 的用途
 
@@ -39,9 +39,9 @@ banner_img: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Docker_%28
 
 ![image-20201202215018108](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202012/215018.png)
 
-* 镜像存储：联合文件系统，UnionFS
+镜像存储：联合文件系统，UnionFS
 
-  
+
 
 ## 容器
 

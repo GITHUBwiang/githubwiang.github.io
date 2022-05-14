@@ -267,8 +267,6 @@ banner_img: https://www.rabbitmq.com/img/logo-rabbitmq.svg
   </dependency>
   ```
 
-  
-
 * RabbitMQ 消息发送者
 
   ```java
@@ -369,8 +367,6 @@ banner_img: https://www.rabbitmq.com/img/logo-rabbitmq.svg
     }
   }
   ```
-
-  
 
 * 消息消费者
 

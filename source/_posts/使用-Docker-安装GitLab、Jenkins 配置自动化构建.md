@@ -95,25 +95,25 @@ docker logs containerId
 
 创建用户
 
-![image-20220502140448072](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/140448.png)
+![image-20220502140448072](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/140448.png)
 
 完成安装
 
-![image-20220502140544617](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/140544.png)
+![image-20220502140544617](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/140544.png)
 
 ## 准备项目
 
-准备两个项目用于配置自动构建：一个 SpringBoot 项目，直接使用内置 tomcat 容器启动；另一个 Vue 项目，使用 docker-nginx 提供服务。
+准备两个项目用于配置自动构建：一个 SpringBoot 项目，直接使用内置 tomcat 容器启动；另一个 Vue 项目，使用 nginx 提供服务。
 
 ### 创建 SpringBoot 项目
 
 使用 IDEA 的 `Spring Initializr` 创建 Spring Boot 项目： 
 
-![image-20220502141400561](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/141400.png)
+![image-20220502141400561](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/141400.png)
 
 根据项目需要选择所需的依赖项：
 
-![image-20220502141603535](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/141603.png)
+![image-20220502141603535](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/141603.png)
 
 添加一个用于测试的请求 `hello`，打印当前日期：
 
@@ -146,19 +146,19 @@ public class HelloController {
 
 在浏览器中测试结果如下：
 
-![image-20220502142817685](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/142817.png)
+![image-20220502142817685](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/142817.png)
 
 ### 创建 Vue 项目
 
 使用 IDEA 创建 Vue 项目可能需要先安装 Vue.js 插件：
 
-![image-20220502143042588](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/143042.png)
+![image-20220502143042588](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/143042.png)
 
 使用 IDEA 创建 Vue 项目：
 
-![image-20220502143208246](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/143208.png)
+![image-20220502143208246](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/143208.png)
 
-在 Vue 中使用 axios 向 SpringBoot 发送请求，并展示。首先添加 axios 的依赖：
+在 Vue 中使用 axios 向 SpringBoot 发送请求并展示。首先添加 axios 的依赖：
 
 ```bash
 npm install axios 
@@ -200,19 +200,19 @@ export default {
 
 从 IDEA 中启动项目，在浏览器中测试结果：
 
-![image-20220502153716482](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/153716.png)
+![image-20220502153716482](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/153716.png)
 
 ### 将项目提交到 GitLab 上
 
 首先需要在 GitLab 上创建项目对应的仓库，选择 “create a project” —— “创建空白项目”：
 
-![image-20220502143747293](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/143747.png)
+![image-20220502143747293](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/143747.png)
 
-![image-20220502143853500](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/143853.png)
+![image-20220502143853500](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/143853.png)
 
 填写项目基本信息后，点击“新建项目”：
 
-![image-20220502144002812](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/144003.png)
+![image-20220502144002812](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/144003.png)
 
 使用如下命令将本地仓库推送到 GitLab 上（以 Spring Boot 项目为例）：
 
@@ -232,19 +232,19 @@ git push -u origin --all
 
 刷新 GitLab 仓库，即可看到提交信息：
 
-![image-20220502154508544](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/154508.png)
+![image-20220502154508544](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/154508.png)
 
 在 IDEA 中也可以通过以下步骤提交并推送（以 Vue 项目为例）：
 
-![image-20220502154744439](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/154744.png)
+![image-20220502154744439](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/154744.png)
 
-![image-20220502154929053](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/154929.png)
+![image-20220502154929053](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/154929.png)
 
-![2022-05-02 15-46-38屏幕截图](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/155034.png)
+![2022-05-02 15-46-38屏幕截图](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/155034.png)
 
-![image-20220502155107812](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/155108.png)
+![image-20220502155107812](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/155108.png)
 
-![image-20220502155223686](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/155223.png)
+![image-20220502155223686](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/155223.png)
 
 ## 配置 Jenkins 自动构建及部署
 
@@ -252,63 +252,63 @@ git push -u origin --all
 
 依次点击 “系统管理” —— “插件管理”、 “全局工具配置”：
 
-![image-20220502161714979](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/161715.png)
+![image-20220502161714979](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/161715.png)
 
-![image-20220502161805008](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/161805.png)
+![image-20220502161805008](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/161805.png)
 
 在插件管理中，选择“可选插件”，选择对应插件勾选后点击 “Install without restart” 安装插件：
 
-![image-20220502171059565](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/171059.png)
+![image-20220502171059565](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/171059.png)
 
-![image-20220502170238457](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/170238.png)
+![image-20220502170238457](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/170238.png)
 
-![image-20220502170535199](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/170535.png)
+![image-20220502170535199](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/170535.png)
 
 安装 NodeJS：
 
-![image-20220502173944063](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/173944.png)
+![image-20220502173944063](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/173944.png)
 
 安装 JDK，这里选择使用 Jenkins 已有的 JDK 11：
 
-![image-20220502162802181](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/162802.png)
+![image-20220502162802181](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/162802.png)
 
 安装 Maven：
 
-![image-20220502162433577](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/162433.png)
+![image-20220502162433577](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/162433.png)
 
 修改 Maven 配置，使用阿里云的 Maven 镜像（根据创建 jenkins 使用的 `-v ~/.docker/data/jenkins:/var/jenkins_home` 可以将 `settings.xml` 文件复制到对应目录）：
 
-![image-20220502163229489](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/163229.png)
+![image-20220502163229489](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/163229.png)
 
 ### 配置 Spring Boot 自动构建
 
 选择“新建任务”：
 
-![image-20220502163615902](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/163615.png)
+![image-20220502163615902](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/163615.png)
 
 输入任务名称，选择”构建一个自由风格的软件项目“，点击“确定”：
 
-![image-20220502163742410](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/163742.png)
+![image-20220502163742410](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/163742.png)
 
-在“源码管理”中选择“Git”，输入GitLab仓库地址，并添加访问的用户名和密码，其中 IP 地址可以通过命令 `docker inspect --format ``'{{ .NetworkSettings.IPAddress }}'` `<container-ID>` 获取：
+在“源码管理”中选择“Git”，输入GitLab仓库地址，并添加访问的用户名和密码，其中 IP 地址可以通过命令 `docker inspect --format '{{ .NetworkSettings.IPAddress }}' <container-ID>` 获取：
 
-![image-20220502165129270](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/165129.png)
+![image-20220502165129270](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/165129.png)
 
-![image-20220502164009167](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/164009.png)
+![image-20220502164009167](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/164009.png)
 
 在“构建”中选择“调用顶层 Maven 目标”，在“构建后操作”中选择“归档成品”：
 
-![image-20220502173134591](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/173134.png)
+![image-20220502173134591](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/173134.png)
 
 保存后点击“立即构建”，查看构建结果：
 
-![image-20220502173240736](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/173240.png)
+![image-20220502173240736](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/173240.png)
 
 ### 配置 Vue 自动构建
 
 “源码管理”和上述一样，在“构建触发器”中选择“Provide Node & npm bin/folder to PATH”：
 
-![image-20220502183321578](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/183321.png)
+![image-20220502183321578](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/183321.png)
 
 在“构建”中选择“执行shell”，在“构建后操作”中选择“归档成品”：
 
@@ -319,21 +319,21 @@ cnpm  run build
 tar -cf dist.tar dist
 ```
 
-![image-20220502183524271](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/183524.png)
+![image-20220502183524271](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/183524.png)
 
 保存后点击“立即构建”，查看构建结果：
 
-![image-20220502183634074](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/183634.png)
+![image-20220502183634074](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/183634.png)
 
 ### 自动部署到服务器
 
-自动构建完成后，可以手动将构建结构下载到本地执行，也可以通过 Jenkins 自动部署到制定服务器上，借助“Publish over SSH”插件完成。安装插件后在“系统管理”——“系统配置”中配置“Publish over SSH”，如图：
+自动构建完成后，可以手动将构建结果下载到本地执行，也可以通过 Jenkins 自动部署到指定服务器上，借助“Publish over SSH”插件完成。安装插件后在“系统管理”——“系统配置”中配置“Publish over SSH”，如图：
 
-![image-20220502211327631](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/211327.png)
+![image-20220502211327631](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/211327.png)
 
 配置完成后可以通过“Test Configuration”验证配置是否正确可用：
 
-![image-20220502211420139](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/211420.png)
+![image-20220502211420139](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/211420.png)
 
 #### 部署 Spring Boot 应用
 
@@ -355,11 +355,11 @@ nohup /root/jdk-11.0.15+10/bin/java -jar /root/deploy/background/backgroud-0.0.1
 
 在”构建后操作“——”Send build artifacts over SSH“中配置如图所示：
 
-![image-20220502220639362](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/220639.png)
+![image-20220502220639362](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/220639.png)
 
 最总效果如下：
 
-![image-20220502220802535](https://raw.githubusercontent.com/xianglin2020/gallery/master/202205/220802.png)
+![image-20220502220802535](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202205/220802.png)
 
 #### 部署 Vue 应用
 

@@ -59,4 +59,4 @@ slaveof 127.0.0.1 6379
 
 ![image-20210227115121194](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202102/115121.png)
 
-## 未完待续
+* [ ] TODO

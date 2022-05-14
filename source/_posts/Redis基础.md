@@ -3,10 +3,10 @@ title: Redis 基础
 date: 2020-10-03 20:53:49
 categories: learn
 tags: redis
-banner_img: https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/Redis%E7%BC%93%E5%AD%98.png
+banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202101/Redis%E7%BC%93%E5%AD%98.png
 ---
 
-![Redis 缓存](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/Redis%E7%BC%93%E5%AD%98.png)
+![Redis 缓存](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202101/Redis%E7%BC%93%E5%AD%98.png)
 
 ## Redis 介绍
 
@@ -77,7 +77,7 @@ Redis 支持 100000+QPS。
 
 传统的阻塞 I / O 模型
 
-![image-20210116223341983](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/image-20210116223341983.png)
+![image-20210116223341983](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202101/image-20210116223341983.png)
 
 ### Redis 数据类型
 
@@ -102,7 +102,7 @@ Redis 支持 100000+QPS。
   * 不保证每次执行都返回某个给定数量的元素，支持模糊查询。
   * 一次返回的数量不可控，只能是大概率符合 count 参数。
 
-  <img src="https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201229224204948.png" alt="image-20201229224204948" style="zoom:50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201229224204948.png" alt="image-20201229224204948" style="zoom:50%;" />
 
 ### 通过 Redis 实现分布式锁
 
@@ -119,11 +119,11 @@ Redis 支持 100000+QPS。
 * 返回值：设置成功，返回 1 ；设置失败，返回 0 。
 * SETNX 是原子操作。
 
-<img src="https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201229225010259.png" alt="image-20201229225010259" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201229225010259.png" alt="image-20201229225010259" style="zoom:67%;" />
 
 使用 `EXPIRE key seconds` 设置过期时间
 
-<img src="https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201229225447919.png" alt="image-20201229225447919" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201229225447919.png" alt="image-20201229225447919" style="zoom:67%;" />
 
 
 
@@ -141,7 +141,7 @@ Redis 支持 100000+QPS。
 
   缺点：不能阻塞等待消息。
 
-  <img src="https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201230205130900.png" alt="image-20201230205130900" style="zoom:67%;" />
+  <img src="https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201230205130900.png" alt="image-20201230205130900" style="zoom:67%;" />
 
 * 方式二：
 
@@ -149,7 +149,7 @@ Redis 支持 100000+QPS。
 
    缺点：消息不能被多个消费者使用。
 
-  <img src="https://raw.githubusercontent.com/xianglin2020/gallery/master/202012/image-20201230205425336.png" alt="image-20201230205425336" style="zoom:67%;" />
+  <img src="https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202012/image-20201230205425336.png" alt="image-20201230205425336" style="zoom:67%;" />
 
 * pub / sub ：主题订阅模式：
 
@@ -157,7 +157,7 @@ Redis 支持 100000+QPS。
 
   缺点：消息的发布是无状态的，无法保证可达。
   
-  ![image-20210117114605047](https://raw.githubusercontent.com/xianglin2020/gallery/master/202101/image-20210117114605047.png)
+  ![image-20210117114605047](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202101/image-20210117114605047.png)
 
 ### Redis 持久化
 

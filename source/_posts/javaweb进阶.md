@@ -52,7 +52,7 @@ tags: [java, web]
 
 * 位置选择器
 
-  ![image-20200808125829925](https://raw.githubusercontent.com/xianglin2020/gallery/master/20200808125830.png)
+  ![image-20200808125829925](https://cdn.jsdelivr.net/gh/xianglin2020/gallery/20200808125830.png)
 
 * 表单选择器
 

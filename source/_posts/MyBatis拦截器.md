@@ -325,7 +325,7 @@ tags: mybatis
 
   ![MyBatis执行过程](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202010/215213.jpg)
 
-## MyBatis 插件`Plugin`
+## MyBatis 插件 `Plugin`
 
 * MyBatis 允许在映射语句执行过程中的某一点进行拦截调用，允许使用插件来拦截的方法调用包括：
 
@@ -447,7 +447,7 @@ tags: mybatis
 
 #### 生成代理对象
 
-* Mybatis 插件主要是基于动态代理实现的，MyBatis 的四大对象都是由`Configuration`负责创建的，查看对应的方法：
+* Mybatis 插件主要是基于动态代理实现的，MyBatis 的四大对象都是由 `Configuration` 负责创建的，查看对应的方法：
 
   ```java
   // Executor 代理对象
