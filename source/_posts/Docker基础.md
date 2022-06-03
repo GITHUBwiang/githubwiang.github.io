@@ -407,5 +407,11 @@ https://hub.docker.com/
   # 创建管理员账户
   db.createUser({ user: 'mongo', pwd: 'mongomongo', roles: [ { role: "root", db: "admin" } ] });
   ```
+  
+* [Redis](https://hub.docker.com/_/redis/)
+
+  ```bash
+  docker run --name some-redis -d -p 6379:6379 redis 
+  ```
 
   

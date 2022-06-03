@@ -279,6 +279,11 @@ rename = "{year}{month}/{hour}{minute}{second}{ext}"
 "html" = '<img src="{url}" />'
 "markdown-simple" = "![]({url})"
 
+# If your network access to Github is abnormal or sluggish, you can try the following CDN acceleration.
+[replacements]
+"raw.githubusercontent.com" = "cdn.jsdelivr.net/gh"
+"/master" = "@master"
+
 # Github uploader
 [uploaders.github]
 # Branch to save files, for example master or main
@@ -292,7 +297,7 @@ repo = "gallery"
 username = "xianglin2020"
 ```
 
-主要是填写 `repo` 、 `username` 和 `pat` 三项。
+主要是填写 `repo` 、 `username` 和 `pat` 三项，其中 `replacements` 用于 CDN 加速。
 
 最后在 Typora 中配置使用 upgit ，「上传服务」选择「Custom Command」，命令填写 upgit 执行路径，点击「验证图片上传选项」，如下图所示：
 
@@ -539,6 +544,18 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
+### MongoDB Compass
+
+```bash
+yay mongodb-compass
+```
+
+### Postman
+
+```bash
+sudo pacman -S postman-bin
+```
+
 ## 其他常用软件
 
 ### vlc
@@ -606,9 +623,72 @@ yay ttf-ms-fonts
 sudo pacman -S aria2 
 ```
 
-### Postman
+
+### 连接 iPhone
+
+#### 从 iPhone 中复制照片到 Manjaro
+
+如果想将 iPhone 中的照片传输到 Manjaro 中，可以通过 `ifuse` 将 iPhone 作为磁盘挂在到 Manjaro 上。
+
+首先需要安装 `ifuse` ，如图：
 
 ```bash
-sudo pacman -S postman-bin
+pacman -Ss ifuse
 ```
 
+![image-20220515144838615](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/144838.png)
+
+为 iPhone 创建挂载点：
+
+```bash
+mkdir -p ~/Documents/iPhone
+```
+
+使用如下命令将 iPhone 挂在到 Manjaro，（执行如下命令时，iPhone 会提示你“是否信任此设备”，然后输入密码，所以第一次挂载时需要多次执行如下命令）：
+
+```bash
+ifuse ~/Documents/iPhone
+```
+
+![image-20220515145438208](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/145519.png)
+
+#### 从 Manjaro 中复制文件到 iPhone
+
+iPhone 的「文件」APP 中能连接服务器，因此可以在 Manjaro 中启动文件共享服务，iPhone 作为客户端连接即可。这里选择使用 `samba`，一种Linux、UNIX系统上可用于共享文件和打印机等资源的协议，这种协议是基于 Client \ Server 型的协议，Client 端可以通过 SMB 访问到 Server（服务器）上的共享资源。
+
+首先需要安装 `samba`：
+
+```bash
+sudo pacman -S samba manjaro-settings-samba
+```
+
+然后编辑 `samba` 的配置文件：
+
+```bash
+sudo vim /etc/samba/smb.conf
+```
+
+只需要编辑 `[homes]` 这部分即可，如下所示：
+
+```properties
+[homes]
+   comment = Home Directories
+   browseable = yes # no -> yes
+   read only = yes
+   create mask = 0700
+   directory mask = 0700
+   valid users = %S
+   path = /run/media/xianglin # path to share
+```
+
+使用如下命令为 `samba` 添加用户：
+
+```bash
+sudo smbpasswd -a xianglin
+```
+
+完成后启动 `smb` 服务，即可在 iPhone 上连接到共享目录中：
+
+```bash
+sudo systemctl restart smb
+```

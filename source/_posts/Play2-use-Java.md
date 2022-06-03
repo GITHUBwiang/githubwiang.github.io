@@ -544,3 +544,402 @@ public Result json(Http.Request request) {
 
 `play.http.parser.maxDiskBuffer`：磁盘缓存限制，默认10MB。
 
+### 组合 Action
+
+使用组合 Action 需要两步：
+
+1、实现一个 Action 用于完成通用功能，比如打印日志等：
+
+```java
+public class VerboseAction extends Action.Simple {
+    private final Logger logger = LoggerFactory.getLogger(VerboseAction.class);
+
+    @Override
+    public CompletionStage<Result> call(Http.Request req) {
+        logger.info("Calling action for {}", req);
+        return delegate.call(req);
+    }
+}
+```
+
+2、在需要打印日志的 Action 方法上增加 `@With()` 注解：
+
+```java
+public class VerboseController extends Controller {
+    @With(VerboseAction.class)
+    public Result verboseIndex() {
+        return ok("It works!");
+    }
+}
+```
+
+测试 `verboseIndex` 请求，控制台中打印出对应的日志：
+
+```bash
+2022-05-15 15:58:55 INFO  controllers.actions.VerboseAction  Calling action for GET /composition/index
+```
+
+ `@With()` 注解能应用在 `Controller` 中，此时其中所有的 Action 都会生效。
+
+#### 自定义注解
+
+上面 `@With(VerboseAction.class)` 也可以用一个自定义的注解实现，比如 `@VerboseAnnotation` ，这个注解自身需要添加 `@With` 注解，定义自定义注解需要三步：
+
+1、定义一个注解，表示需要的功能：
+
+```java
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@With(VerboseAnnotationAction.class)
+public @interface VerboseAnnotation {
+    boolean value() default true;
+}
+```
+
+2、在 Action 中实现通用功能，比如打印日志：
+
+`VerboseAnnotationAction` 通过 `configuration` 获取 `@VerboseAnnotation` 中定义的值：
+
+```bash
+public class VerboseAnnotationAction extends Action<VerboseAnnotation> {
+    private final static Logger logger = LoggerFactory.getLogger(VerboseAction.class);
+
+    @Override
+    public CompletionStage<Result> call(Http.Request req) {
+        if (configuration.value()) {
+            logger.info("Calling action for {}", req);
+        }
+        return delegate.call(req);
+    }
+}
+```
+
+3、在 Action 方法上增加自定义的注解：
+
+```java
+@VerboseAnnotation
+public Result verboseHome() {
+    return ok("It works too!");
+}
+```
+
+事实上 `@play.mvc.Security.Authenticated` 和 `@play.cache.Cached` 也是通过此方式实现的。
+
+#### 打印组合 Action 的作用顺序
+
+在 `logback.xml` 配置文件中添加如下配置，就能在日志中看到完整的 Action 组合链：
+
+```xml
+<logger name="play.mvc.Action" level="DEBUG" />
+```
+
+```bash
+2022-05-15 16:29:45 DEBUG play.mvc.Action  ### Start of action order
+2022-05-15 16:29:45 DEBUG play.mvc.Action  1. controllers.actions.VerboseAnnotationAction defined on public play.mvc.Result controllers.VerboseController.verboseHome()
+2022-05-15 16:29:45 DEBUG play.mvc.Action  2. play.http.DefaultActionCreator$1()
+2022-05-15 16:29:45 DEBUG play.mvc.Action  3. play.core.j.JavaAction$$anon$1()
+2022-05-15 16:29:45 DEBUG play.mvc.Action  ### End of action order
+```
+
+### 拦截 HTTP 请求
+
+Play 提供了两种方式拦截 Action 的调用，第一种是 `ActionCreator` ，通过 `createAction` 方法返回一个 Action，这个 Action 会作为 Action 组合链
+
+中第一个 Action 或者最后一个 Action，取决于配置：`play.http.actionComposition.executeActionCreatorActionFirst`。
+
+第二种方式是实现自定义的 `HttpRequestHandler`。
+
+#### Action creators
+
+默认需要在根包下定义一个名为 `ActionCreator` 且实现 `play.http.ActionCreator` 的类，如下所示：
+
+```java
+public class ActionCreator implements play.http.ActionCreator {
+  @Override
+  public Action createAction(Http.Request request, Method actionMethod) {
+    return new Action.Simple() {
+      @Override
+      public CompletionStage<Result> call(Http.Request req) {
+        return delegate.call(req);
+      }
+    };
+  }
+}
+```
+
+或者使用如下配置：
+
+```properties
+play.http.actionCreator = "com.example.MyActionCreator"
+```
+
+## 异步 HTTP 编程
+
+### 处理异步结果
+
+#### 创建和使用 `CompletionStage<Result>`
+
+Java8 提供了 `CompletionStage` 表示 `promise`，`CompletionStage<Result>` 最终会得到一个 `Result`。通过 `CompletableFuture.supplyAsync()` 方法可以得到一个 `CompletionStage`：
+
+```java
+// creates new task
+CompletionStage<Integer> promiseOfInt = CompletableFuture.supplyAsync(() -> intensiveComputation());
+```
+
+`supplyAsync` 会创建一个新的任务提交到 fork/join 框架中执行。
+
+#### 使用 `HttpExecutionContext`
+
+在 Action 中使用 Java `CompletionStage` 时，必须显式提供 HTTP 执行上下文作为执行期，以确保类加载器保持在作用域内，代码如下所示：
+
+```java
+public class AsyncController extends Controller {
+    private final HttpExecutionContext httpExecutionContext;
+
+    @Inject
+    public AsyncController(HttpExecutionContext httpExecutionContext) {
+        this.httpExecutionContext = httpExecutionContext;
+    }
+
+    public CompletionStage<Result> index() {
+        CompletionStage<Integer> promiseOfInt = CompletableFuture.supplyAsync(this::intensiveComputation, httpExecutionContext.current());
+        return promiseOfInt.thenApply(integer -> ok(String.valueOf(integer)));
+    }
+
+    private Integer intensiveComputation() {
+        int value = Integer.MIN_VALUE;
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            value++;
+        }
+        return value;
+    }
+}
+
+```
+
+* [ ] [以确保类加载器保持在作用域内](https://www.playframework.com/documentation/2.8.x/ThreadPools#Class%20loaders)。
+
+#### 使用 `CustomExecutionContext` and `HttpExecution`
+
+使用 `CompletionStage` 或者 `HttpExecutionContext` 时仍然使用的是 Play 默认的执行上下文，如果需要执行一些阻塞 API 比如 JDBC，最好的方式是实现自己的 `CustomExecutionContext`，将阻塞任务从 Play 的线程池中移出去，通过继承 `play.libs.concurrent.CustomExecutionContext` 实现自定义的 `ExecutionContex`：
+
+```java
+public class MyCustomExecutionContext extends CustomExecutionContext {
+    @Inject
+    public MyCustomExecutionContext(ActorSystem actorSystem) {
+        super(actorSystem, "blocking-io-dispatcher");
+    }
+}
+```
+
+`blocking-io-dispatcher` 在 `application.conf` 中定义：
+
+```properties
+blocking-io-dispatcher {
+  type = Dispatcher
+  executor = "thread-pool-executor"
+  thread-pool-executor {
+    fixed-pool-size = 32
+  }
+  throughput = 1
+}
+```
+
+使用方法如下：
+
+```java
+public class AsyncWithCustomExecutionContentController extends Controller {
+    private final MyCustomExecutionContext myCustomExecutionContext;
+
+    @Inject
+    public AsyncWithCustomExecutionContentController(MyCustomExecutionContext myCustomExecutionContext) {
+        this.myCustomExecutionContext = myCustomExecutionContext;
+    }
+
+    public CompletionStage<Result> index() {
+        var executor = HttpExecution.fromThread(myCustomExecutionContext);
+        return CompletableFuture.supplyAsync(() -> ok("It's work!"), executor);
+    }
+}
+
+```
+
+使用 `HttpExecution.fromThread` 方法从 `MyCustomExecutionContext` 中获取已存在的线程池。
+
+#### 处理超时
+
+请求经常需要限定等待时间，避免出错时浏览器无限等待。通过 `play.api.libs.concurrent.Futures.timeout` 包装 `CompletionStage` 实现：
+
+```java
+public class TimeoutController extends Controller {
+    private final Futures futures;
+    private final MyCustomExecutionContext myCustomExecutionContext;
+
+    @Inject
+    public TimeoutController(Futures futures, MyCustomExecutionContext myCustomExecutionContext) {
+        this.futures = futures;
+        this.myCustomExecutionContext = myCustomExecutionContext;
+    }
+
+    public CompletionStage<Result> index() {
+        return futures.timeout(delayedResult(), Duration.ofSeconds(1));
+    }
+    
+    public CompletionStage<Result> delayedResult() {
+        ExecutionContextExecutor executor = HttpExecution.fromThread(myCustomExecutionContext);
+        long start = System.currentTimeMillis();
+        return futures.delayed(() -> CompletableFuture.supplyAsync(() -> {
+            long end = System.currentTimeMillis();
+            long seconds = end - start;
+            return "rendered after " + seconds + " seconds";
+        }, executor), Duration.of(3, SECONDS)).thenApply(Results::ok);
+    }
+}
+```
+
+需要注意的是，超时 `timeout` 和取消 `cancel` 不同，超时后 `delayedResult` 仍会执行，尽管结果不会被返回。
+
+## Play modules
+
+### Play with Mongo
+
+[PlayMorphia](https://github.com/morellik/play-morphia) 是 [Morphia](https://github.com/MorphiaOrg/morphia) 针对 Play 的拓展，方便使用 Morphia 进行 Play MongoDB 开发。
+
+#### 安装方法
+
+添加 Morphia 的依赖：
+
+```scala
+libraryDependencies ++= Seq(
+    guice,
+    "dev.morphia.morphia" % "core" % "1.6.1"
+)
+```
+
+从 PlayMorphia 项目中下载 [play_morphia_jar](https://github.com/morellik/play-morphia/tree/master/out/artifacts/play_morphia_jar) 放在项目的 `lib` 目录下；
+
+在 `conf/application.conf` 中配置 Mongo 的连接信息，最终效果如下图所示（如果使用 IDEA,可以右键点击 `lib` 选择“添加为库”）：
+
+![image-20220515214011364](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/214011.png)
+
+#### 使用方法
+
+简单按照 `controllers`、`models` 和 `repositories` 的结构创建三个包，以操作 `User` 为例。
+
+`User` Model：
+
+```java
+package models;
+
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import org.bson.types.ObjectId;
+
+/**
+ * @author xianglin
+ */
+@Entity("DB.users")
+public class User {
+    @Id
+    private ObjectId id;
+    private String firstname;
+    private String lastname;
+    private String email;
+
+    // getter and setter
+}
+```
+
+`UserRepository`：
+
+```java
+package repositories;
+
+import dev.morphia.Key;
+import it.unifi.cerm.playmorphia.PlayMorphia;
+import models.User;
+import org.bson.types.ObjectId;
+
+import javax.inject.Inject;
+
+/**
+ * @author xianglin
+ */
+public class UserRepository {
+    private final PlayMorphia playMorphia;
+
+    @Inject
+    public UserRepository(PlayMorphia playMorphia) {
+        this.playMorphia = playMorphia;
+    }
+
+    public User findById(String id) {
+        return playMorphia
+                .datastore()
+                .createQuery(User.class)
+                .field("id")
+                .equal(new ObjectId(id))
+                .first();
+    }
+
+    public Key<User> save(User user) {
+        return playMorphia
+                .datastore()
+                .save(user);
+    }
+}
+```
+
+`MongoController`：
+
+```java
+package controllers;
+
+import models.User;
+import play.libs.Json;
+import play.mvc.Controller;
+import play.mvc.Result;
+import repositories.UserRepository;
+
+import javax.inject.Inject;
+
+/**
+ * 测试 MongoDB 操作
+ *
+ * @author xianglin
+ */
+public class MongoController extends Controller {
+    private final UserRepository userRepository;
+
+    @Inject
+    public MongoController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public Result getUser(String id) {
+        return ok(Json.toJson(userRepository.findById(id)));
+    }
+
+    public Result saveUser() {
+        User user = new User();
+        user.setFirstname("Xiang");
+        user.setLastname("Lin");
+        user.setEmail("mail@mail.com");
+        return ok(Json.toJson(userRepository.save(user)));
+    }
+}
+
+```
+
+`routes`：
+
+```properties
+GET         /mongo/user/get            controllers.MongoController.getUser(id: String)
+POST        /mongo/user/save           controllers.MongoController.saveUser()
+```
+
+最后使用 postman 测试接口，结果如下：
+
+![image-20220515215246529](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/215246.png)
+
+![image-20220515215331674](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/215331.png)
