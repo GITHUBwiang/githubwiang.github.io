@@ -163,29 +163,29 @@ firewall-cmd --reload
 
 #### 创建 Atlas
 
-![image-20220528091807871](/home/xianglin/.config/Typora/typora-user-images/image-20220528091807871.png)
+![image-20220528091807871](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202206/150813.png)
 
-![image-20220528092727567](/home/xianglin/.config/Typora/typora-user-images/image-20220528092727567.png)
+![image-20220528092727567](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202206/150948.png)
 
-![image-20220528092925782](/home/xianglin/.config/Typora/typora-user-images/image-20220528092925782.png)
+![image-20220528092925782](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202206/151039.png)
 
-![image-20220528093224034](/home/xianglin/.config/Typora/typora-user-images/image-20220528093224034.png)
+![image-20220528093224034](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202206/151104.png)
 
 添加允许连接的 IP 列表，可以使用 `0.0.0.0/0` 表示允许任意 IP 连接。
 
-![image-20220528093246682](/home/xianglin/.config/Typora/typora-user-images/image-20220528093246682.png)
+![image-20220528093246682](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202206/151131.png)
 
-![image-20220528093335144](/home/xianglin/.config/Typora/typora-user-images/image-20220528093335144.png)
+![image-20220528093335144](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202206/151156.png)
 
 #### 连接到 Cluster
 
 在 Altas 控制台中点击「Connect」按钮，在「Setup connection security」中选择通过哪种方式连接。这里选择使用 Java 客户端连接，故选择「Connect your application」。
 
-![image-20220528094354092](/home/xianglin/.config/Typora/typora-user-images/image-20220528094354092.png)
+![image-20220528094354092](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202206/151219.png)
 
 选择对应的 Java 驱动版本，复制生成的连接字符串到应用程序中。
 
-![image-20220528093435177](/home/xianglin/.config/Typora/typora-user-images/image-20220528093435177.png)
+![image-20220528093435177](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202206/151246.png)
 
 连接到 Cluster 和 连接本地 MongoDB了一样，示例代理如下：
 
@@ -218,7 +218,7 @@ public class QuickStartClusterExample {
 
 随后到 Atlas 控制台中查看刚刚插入的记录：
 
-![image-20220528094151776](/home/xianglin/.config/Typora/typora-user-images/image-20220528094151776.png)
+![image-20220528094151776](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202206/151313.png)
 
 ### 导入样本数据
 
