@@ -556,6 +556,14 @@ yay mongodb-compass
 sudo pacman -S postman-bin
 ```
 
+### Wireshark
+
+```bash
+sudo pacman -S wireshark-qt
+
+sudo usermod -aG wireshark $USER 
+```
+
 ## 其他常用软件
 
 ### vlc

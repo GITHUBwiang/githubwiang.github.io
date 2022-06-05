@@ -799,6 +799,93 @@ public class TimeoutController extends Controller {
 
 需要注意的是，超时 `timeout` 和取消 `cancel` 不同，超时后 `delayedResult` 仍会执行，尽管结果不会被返回。
 
+### 流式 HTTP 响应
+
+#### `Content-Length` 响应头
+
+HTTP1.1 支持长连接，一个 TCP 连接可以服务多次 HTTP 请求，此时服务端必须使用 `Content-Length` 响应头。默认情况下，使用 Play 不需要明确指定 HTTP 响应头，因为返回的内容是明确的，Play 可以自行计算并添加对于的响应头。HTTP 响应由响应头和响应体组成，使用 `play.http.HttpEntity` 表示响应体，则 Play 中一个 HTTP 响应的表示如下：
+
+```java
+public Result httpResponse() {
+    return new Result(
+        new ResponseHeader(Http.Status.OK, Collections.emptyMap()),
+        new HttpEntity.Strict(ByteString.fromString("It's work!"), Optional.of(Http.MimeTypes.TEXT))
+    );
+}
+```
+
+#### 发送大量数据
+
+使用 Play 返回一个文件给客户端，构建一个 `Source[ByteString, _]` 作为响应内容，然后使用 `play.http.HttpEntity` 返回，如下所示：
+
+```java
+public Result index() {
+    var path = Paths.get("/home/xianglin/Downloads/20220504100611.json");
+    var source = FileIO.fromPath(path);
+    var contentLength = Optional.<Long>empty();
+
+    return new Result(
+        new ResponseHeader(Http.Status.OK, Collections.emptyMap()),
+        new HttpEntity.Streamed(source, contentLength, Optional.of(Http.MimeTypes.TEXT))
+    );
+}
+```
+
+上面的响应没有明确指定 `contentLength`，Play 会就是将文件加载到内存中然后计算它。对于大文件，需要明确指定 `contentLength` 避免这种情况发送，如下：
+
+```java
+public Result index() throws IOException {
+    var path = Paths.get("/home/xianglin/Downloads/20220504100611.json");
+    var source = FileIO.fromPath(path);
+
+    // compute the response size
+    var contentLength = Optional.of(Files.size(path));
+
+    return new Result(
+        new ResponseHeader(Http.Status.OK, Collections.emptyMap()),
+        new HttpEntity.Streamed(source, contentLength, Optional.of(Http.MimeTypes.TEXT))
+    );
+}
+```
+
+#### 处理文件
+
+Play 可以使用 `play.mvc.Results#ok(java.io.File)` 方法直接返回文件，此方法会添加 `Content-Type` 和 `Content-Disposition` 响应头。默认情况下是 `Content-Disposition: inline; filename=`，如果不想浏览器下载文件而是直接打开文件，可以使用 `play.mvc.Results#ok(java.io.File, boolean)`：
+
+```java
+public Result file() {
+    return ok(new File("/home/xianglin/Downloads/20220504100611.json"), Optional.of("示例文件.json")).as(Http.MimeTypes.BINARY);
+}
+
+public Result fileToDisplay() {
+    return ok(new File("/home/xianglin/Downloads/20220504100611.json"), false);
+}
+```
+
+#### 分片响应
+
+分块传输编码允许 HTTP 服务器发送给客户端的数据分成多个部分。Play 中可以使用 `play.mvc.Results#ok(java.io.InputStream)`  和 `ok().chunked()` 方法返回分块数据：
+
+```java
+public Result fileStream() throws FileNotFoundException {
+    return ok(new FileInputStream("/home/xianglin/Downloads/20220504100611.json"));
+}
+
+public Result trunked() {
+    Source<ByteString, ?> trunked = Source.<ByteString>actorRef(256, OverflowStrategy.dropNew())
+        .mapMaterializedValue(
+        sourceActor -> {
+            sourceActor.tell(ByteString.fromString(""), null);
+            sourceActor.tell(ByteString.fromString(""), null);
+            sourceActor.tell(ByteString.fromString(""), null);
+            sourceActor.tell(ByteString.fromString(""), null);
+            return NotUsed.getInstance();
+        }
+    );
+    return ok().chunked(trunked);
+}
+```
+
 ## Play modules
 
 ### Play with Mongo
@@ -943,3 +1030,7 @@ POST        /mongo/user/save           controllers.MongoController.saveUser()
 ![image-20220515215246529](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/215246.png)
 
 ![image-20220515215331674](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/215331.png)
+
+#### 使用新版 Morphia
+
+Morphia 2.0 以上版本需要 Java11，已经更高版本的 mongo-drive，请使用 [play-morphia](https://github.com/xianglin2020/play-morphia) 中修改的 [play-morphia.jar](https://github.com/xianglin2020/play-morphia/blob/master/out/artifacts/play_morphia_jar/play-morphia.jar)。
