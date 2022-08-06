@@ -294,60 +294,6 @@ db.collection.deleteMany()
 
 <img src="https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/181854.png" alt="image-20220521181854587" style="zoom:50%;" />
 
-### 插入文档
-
-使用 `db.collection.insertOne()` 插入单条记录到集合中，如果插入的集合没有指定 `_id` 字段，MongoDB 会自动生成一个 `ObjectId`，如果集合不存在，那么插入时会创建对应的集合。
-
-```shell
-db.inventory.insertOne( { item: "canvas", qty: 100, tags: ["cotton"], size: { h: 28, w: 35.5, uom: "cm" } })
-```
-
-![image-20220521221500429](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/221500.png)
-
-插入成功后会返回记录对应的 `_id`。
-
-插入多条记录和插入单条记录一样，只需要使用 `db.collection.insertMany()`：
-
-```shell
-db.inventory.insertMany([
-   { item: "journal", qty: 25, tags: ["blank", "red"], size: { h: 14, w: 21, uom: "cm" } },
-   { item: "mat", qty: 85, tags: ["gray"], size: { h: 27.9, w: 35.5, uom: "cm" } },
-   { item: "mousepad", qty: 25, tags: ["gel", "blue"], size: { h: 19, w: 22.85, uom: "cm" } }
-])
-```
-
-![image-20220521221939960](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202205/221940.png)
-
-### 查询文档
-
-查询选择器：[query-selectors](https://www.mongodb.com/docs/manual/reference/operator/query/#query-selectors)。
-
-使用 `db.collection.find({})` 查询文档，查询所有记录：
-
-```shell
-db.inventory.find( {} )
-```
-
-指定相等条件查询：`status` 等于 `D`
-
-```shell
-db.inventory.find( { status: "D" } )
-```
-
-指定 `AND` 条件查询：`status` 等于 `A` 且 `qty` 小于 30
-
-```shell
-db.inventory.find({status: "A", qty:{$lt: 30}})
-```
-
-指定 `OR` 查询条件：`status` 等于 `A` 或 `qty` 小于 30
-
-```shell
-db.inventory.find({$or: [{status: "A"}, {qty: {$lt: 30}}]})
-```
-
-
-
 ## 使用 MongoDB 开发程序
 
 Java API 的使用细节请参考官方教程：[MongoDB Java Driver](https://www.mongodb.com/docs/drivers/java/sync/current/)。
