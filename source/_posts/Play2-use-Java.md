@@ -8,6 +8,8 @@ excerpt: Play is a high-productivity Java and Scala web application framework th
 
 # Getting started
 
+*已经成功将项目从 Play 改为 SpringBoot 不再更新*
+
 官方网站：
 
 [play](https://www.playframework.com/)
@@ -686,7 +688,7 @@ Java8 提供了 `CompletionStage` 表示 `promise`，`CompletionStage<Result>` �
 CompletionStage<Integer> promiseOfInt = CompletableFuture.supplyAsync(() -> intensiveComputation());
 ```
 
-`supplyAsync` 会创建一个新的任务提交到 fork/join 框架中执行。
+`supplyAsync` 会创建一个新的任务提交到 `fork/join` 框架中执行。
 
 #### 使用 `HttpExecutionContext`
 
@@ -803,7 +805,7 @@ public class TimeoutController extends Controller {
 
 #### `Content-Length` 响应头
 
-HTTP1.1 支持长连接，一个 TCP 连接可以服务多次 HTTP 请求，此时服务端必须使用 `Content-Length` 响应头。默认情况下，使用 Play 不需要明确指定 HTTP 响应头，因为返回的内容是明确的，Play 可以自行计算并添加对于的响应头。HTTP 响应由响应头和响应体组成，使用 `play.http.HttpEntity` 表示响应体，则 Play 中一个 HTTP 响应的表示如下：
+HTTP1.1 支持长连接，一个 TCP 连接可以服务多次 HTTP 请求，此时服务端必须使用 `Content-Length` 响应头。默认情况下，使用 Play 不需要明确指定 HTTP 响应头，因为返回的内容是明确的，Play 可以自行计算并添加对应的响应头。HTTP 响应由响应头和响应体组成，使用 `play.http.HttpEntity` 表示响应体，Play 中一个 HTTP 响应的表示如下：
 
 ```java
 public Result httpResponse() {
@@ -831,7 +833,7 @@ public Result index() {
 }
 ```
 
-上面的响应没有明确指定 `contentLength`，Play 会就是将文件加载到内存中然后计算它。对于大文件，需要明确指定 `contentLength` 避免这种情况发送，如下：
+上面的响应没有明确指定 `contentLength`，Play 就会将文件加载到内存然后计算长度。对于大文件，需要明确指定 `contentLength` 避免这种情况发送，如下：
 
 ```java
 public Result index() throws IOException {
