@@ -22,7 +22,7 @@ vue create hello-vue3-cli
 
 选择 `[Vue 3]` 即可
 
-![image-20221231114751200](/Users/linxiang/Library/Application Support/typora-user-images/image-20221231114751200.png)
+![image-20221231114751200](https://cdn.jsdelivr.net/gh/xianglin2020/gallery@master/202301/01215907.png)
 
 ### 使用 vite 创建
 
