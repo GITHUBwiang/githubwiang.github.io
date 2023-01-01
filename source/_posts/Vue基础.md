@@ -1,16 +1,14 @@
 ---
-title: Vue 基础
+title: Vue2 基础
 date: 2022-08-11 21:22:49
 tags: vue
 categories: learn
 excerpt: Vue 基础知识与语法。
 ---
 
-# Vue 基础
+# Vue2 基础
 
 Vue2：https://v2.cn.vuejs.org/
-
-Vue3：https://cn.vuejs.org/
 
 Vue 是一套用于构建用户界面的渐进式框架。
 

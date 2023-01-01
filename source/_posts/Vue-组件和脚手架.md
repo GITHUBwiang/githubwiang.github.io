@@ -1,12 +1,12 @@
 ---
-title: Vue 组件和脚手架
+title: Vue2 组件和脚手架
 date: 2022-12-07 20:14:54
 tags: vue
 categories: learn
 excerpt: Vue 组件语法与脚手架使用。
 ---
 
-# Vue 组件
+# Vue2 组件
 
 组件是实现应用中局部功能代码和资源的集合，主要作用是复用代码，简化项目编码，提高运行效率。
 
