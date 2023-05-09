@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Daily Record for Lin
+title: Daily Record for GITHUBwiang
 subtitle: 'some page for daily!'
 description: '记录一些学习工作中的知识技能，方便后续查阅！'
 keywords: Java 
-author: XiangLin
+author: GITHUBwiang
 language: zh-CN
 timezone: ''
 
@@ -104,6 +104,6 @@ theme: fluid
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: 'git'
-  repo: 'https://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@github.com/xianglin2020/xianglin2020.github.io.git'
+  repo: 'git@github.com:GITHUBwiang/githubwiang.github.io.git'
   branch: gh-page
   token: ""

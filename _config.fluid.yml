@@ -11,7 +11,7 @@
 # 全局
 # Site
 #---------------------------
-favicon: /img/favicon.png # 网站标签页的 icon
+favicon: https://cdn.jsdelivr.net/gh/xianglin2020/gallery/WechatIMG1.jpeg # 网站标签页的 icon
 
 apple_touch_icon: /img/favicon.png # 用于苹果设备的 icon
 
@@ -125,7 +125,7 @@ version:  # 主题版本相关
 # Header
 #---------------------------
 navbar:
-  blog_title: Excellent Boy # 导航栏左侧的标题，为空则按 hexo config.title 显示
+  blog_title: 优秀的同学 # 导航栏左侧的标题，为空则按 hexo config.title 显示
   ground_glass:  # 导航栏毛玻璃特效，实验性功能，可能会造成页面滚动掉帧和抖动，部分浏览器不支持会自动不生效
     enable: true
     px: 3  # 模糊像素，只能为数字，数字越大模糊度越高
@@ -201,7 +201,7 @@ index:
       keys: ["hitokoto"]
   auto_excerpt:
     enable: true
-  post_url_target: _self  # available: _blank | _self
+  post_url_target: _blank  # available: _blank | _self
   post_meta: # 是否显示文章信息（时间、分类、标签）
     date: true
     category: true
@@ -219,7 +219,7 @@ page:
 # Post Page
 #---------------------------
 post:  # 部分配置同时控制自定义页面，注意备注
-	default_index_img: 
+	default_index_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery/WechatIMG1.jpeg
   banner_img: https://cdn.jsdelivr.net/gh/xianglin2020/gallery/202102/45.jpg
   banner_img_height: 50  # available: 0 - 100
   banner_mask_alpha: 0.3  # available: 0 - 1.0
